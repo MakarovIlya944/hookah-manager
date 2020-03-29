@@ -1,7 +1,7 @@
 from django.views import View
 from django.template.response import TemplateResponse
-from hookah.models import Recipe, Tabacco
-from hookah.management.commands.tabaccos import construct_tobacco
+from website.models import Recipe, Tabacco
+from website.management.commands.tabaccos import construct_tobacco
 from django.shortcuts import redirect
 
 
@@ -23,7 +23,7 @@ class HookahIndex(View):
         tabaccos = Tabacco.objects.all().filter(Have=True)
         HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None}
                                 for t in tabaccos]
-        return TemplateResponse(request, "hookah/index.html", context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
+        return TemplateResponse(request, "index.html", context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
 
     def post(self, request, *args, **kwargs):
 
@@ -31,7 +31,7 @@ class HookahIndex(View):
         taste = request.POST.get('taste')
         mark = request.POST.get('mark')
         # if mass == '' or taste == '' or mark == '':
-        #     return TemplateResponse(request, "hookah/index.html",
+        #     return TemplateResponse(request, "index.html",
         #                             context={'tabaccos': HookahIndex.tabaccos,
         #                                      'recepies': HookahIndex.recepies,
         #                                      'error': {'mark': mark,
