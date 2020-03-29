@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from website.website.views import HookahIndex
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', HookahIndex.as_view()),
 ]
