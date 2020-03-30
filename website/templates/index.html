@@ -26,7 +26,7 @@
                 <div class="swiper-slide" style="padding: 100px;">
 
                     <ul class="list-group">
-                        {% for tabac in element.tobaccos %}
+                        {% for tabac in element.tabaccos %}
                         <li class="list-group-item {{ tabac.have }}"><span>{{ tabac.taste }}</span></li>
                         {% endfor %}
                     </ul>
@@ -56,30 +56,6 @@
                 </div>
                 {% endfor %}
             </div>
-        </div>
-    </div>
-    
-    <div class="container">
-        <h3 class="name">Добавить новый</h3>
-        <div class="box" style="padding-left: 100px;padding-right: 100px;">
-            <form action="" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text">Вкус</span></div><input
-                            type="text" class="form-control" name="taste" />
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text">Марка</span></div><input
-                            type="text" class="form-control" name="mark" />
-                    </div>
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text">Вес</span></div><input
-                            type="number" class="form-control" name="mass" />
-                    </div>
-                </div>
-                <button type="submit" name="submit" class="btn btn-primary">Добавить</button>
-            </form>
         </div>
     </div>
 </body>

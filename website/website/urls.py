@@ -20,4 +20,5 @@ from website.views import HookahIndex
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HookahIndex.as_view()),
+    path('add', HookahIndex.as_view(template='add')),
 ]
