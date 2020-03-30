@@ -1,20 +1,67 @@
 [
-    "мята",
-    {
-        "mark": "element",
-        "taste": "елка"
-    },
-    {
-        "mark": "b3",
-        "taste": "чай"
-    },
-    {
-        "mark": "daily hookah",
-        "taste": "банан"
-    },
     {
         "mark": "burn",
-        "taste": "можжевельник"
+        "taste": "можжевельник",
+        "mass": 30
     },
-    "елка"
+    {
+        "mark": "element",
+        "taste": "пихта",
+        "mass": 10
+    },
+    {
+        "mark": "xxx",
+        "taste": "кент-мент",
+        "mass": 10
+    },
+    {
+        "mark": "cobra",
+        "taste": "грейпфрут",
+        "mass": 15
+    },
+    {
+        "mark": "element",
+        "taste": "малина",
+        "mass": 20
+    },
+    {
+        "mark": "щербет",
+        "taste": "мятное молоко",
+        "mass": 50
+    },
+    {
+        "mark": "darkside",
+        "taste": "фисташковое мороженое",
+        "mass": 10
+    },
+    {
+        "mark": "sebero",
+        "taste": "холодок",
+        "mass": 15
+    },
+    {
+        "mark": "sebero",
+        "taste": "пряный чай",
+        "mass": 20
+    },
+    {
+        "mark": "sebero",
+        "taste": "томат",
+        "mass": 30
+    },
+    {
+        "mark": "sebero",
+        "taste": "огурец базилик",
+        "mass": 20
+    },
+    {
+        "mark": "dailyhookah",
+        "taste": "свободная куба",
+        "mass": 20
+    },
+    {
+        "mark": "darkside",
+        "taste": "барбарисовая жвачка",
+        "mass": 80
+    }
 ]

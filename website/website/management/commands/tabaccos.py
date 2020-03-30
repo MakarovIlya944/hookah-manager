@@ -21,7 +21,12 @@ def construct_tobacco(data):
     try:
         return Tabacco.objects.get(Taste=taste, Mark=mark)
     except Exception:
-        Tabacco(Mark=mark, Taste=taste).save()
+        try:
+            t = Tabacco.objects.get(Taste=taste, Mark='любой')
+            t.Mark = mark
+            t.Save()
+        except Exception:
+            Tabacco(Mark=mark, Taste=taste).save()
     return Tabacco.objects.get(Taste=taste, Mark=mark)
 
 
@@ -44,6 +49,15 @@ class Command(BaseCommand):
                 for r in data:
                     try:
                         t = construct_tobacco(r)
+                        if t.Taste == 'darkside':
+                            t.Icon = 'fas fa-space-shuttle'
+                        elif t.Taste == 'sebero':
+                            t.Icon = 'fas fa-paw'
+                        elif t.Taste == 'element':
+                            t.Icon = 'fab fa-elementor'
+                        elif t.Taste == 'dailyhookah':
+                            t.Icon = 'icon-support'
+                        t.Mass = r.get('mass')
                         t.Have = True
                         t.save()
                         print(str(t))

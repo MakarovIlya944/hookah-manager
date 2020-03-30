@@ -24,7 +24,7 @@ class HookahIndex(View):
         tabaccos = Tabacco.objects.all().filter(Have=True)
         HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None}
                                 for t in tabaccos]
-        page = "index.html" if self.template == 'index' else "add.html"
+        page = self.template + '.html'
         return TemplateResponse(request, page, context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
 
     def post(self, request, *args, **kwargs):
