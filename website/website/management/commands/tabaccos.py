@@ -49,13 +49,13 @@ class Command(BaseCommand):
                 for r in data:
                     try:
                         t = construct_tobacco(r)
-                        if t.Taste == 'darkside':
+                        if t.Mark == 'darkside':
                             t.Icon = 'fas fa-space-shuttle'
-                        elif t.Taste == 'sebero':
+                        elif t.Mark == 'sebero':
                             t.Icon = 'fas fa-paw'
-                        elif t.Taste == 'element':
+                        elif t.Mark == 'element':
                             t.Icon = 'fab fa-elementor'
-                        elif t.Taste == 'dailyhookah':
+                        elif t.Mark == 'dailyhookah':
                             t.Icon = 'icon-support'
                         t.Mass = r.get('mass')
                         t.Have = True

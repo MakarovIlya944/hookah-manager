@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import Q
 
 class Tabacco(models.Model):
 
@@ -32,15 +32,17 @@ class Recipe(models.Model):
     Description = models.TextField(max_length=128)
 
     def price(self):
-        tobaccos = self.TabaccoList.all()
+        tabaccos = Tabacco.objects.filter(Have=True).all()
+        recipe = self.TabaccoList.all()
         a = 0
-        for t in tobaccos:
-            a += 1 if t.Have else 0
+        for t in recipe:
+            if (t.Mark == 'любой' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Mark=t.Mark, Taste=t.Taste)) > 0:
+                a += 1
         if a:
-            return a / len(tobaccos)
+            return a / len(recipe)
         else:
-            return -len(tobaccos)
+            return -len(recipe)
 
     def __str__(self):
-        tobaccos = self.TabaccoList.all()
-        return '\n'.join([str(e) for e in tobaccos])
+        tabaccos = self.TabaccoList.all()
+        return '\n'.join([str(e) for e in tabaccos])
