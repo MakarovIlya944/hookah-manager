@@ -63,5 +63,20 @@
         "mark": "darkside",
         "taste": "барбарисовая жвачка",
         "mass": 80
+    },
+    {
+        "mark": "cobra",
+        "taste": "ореховый пирог",
+        "mass": 40
+    },
+    {
+        "mark": "dgactra",
+        "taste": "тропический микс",
+        "mass": 45
+    },
+    {
+        "mark": "burn",
+        "taste": "кислая вишня",
+        "mass": 100
     }
 ]

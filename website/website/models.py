@@ -11,7 +11,7 @@ class Tabacco(models.Model):
     Have = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
+        return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "любой" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
 
 
 class Recipe(models.Model):
