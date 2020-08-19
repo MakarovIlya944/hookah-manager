@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Hoohkah</title>
+    {% load static %}
+    <link rel="icon" href="{% static "hookah.ico" %}">
+    <link rel="stylesheet" href="{% static "assets/bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/fonts/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/styles.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/fonts/fontawesome-all.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/fonts/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/fonts/ionicons.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/fonts/line-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/fonts/simple-line-icons.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/fonts/fontawesome5-overrides.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/styles.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <script src="{% static "assets/js/jquery.min.js" %}"></script>
+    <script src="{% static "assets/bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <script src="{% static "assets/js/script.min.js" %}"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean">
+        <div class="container"><a class="navbar-brand" href="/" style="height: 44px;font-size: 30px;">Кальян менеджер</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/add">Добавить новый</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="/stat">Посмотреть отзывы</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+    <div class="simple-slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- <div class="swiper-slide" style="background-image:url(https://placeholdit.imgix.net/~text?txtsize=68&amp;txt=Slideshow+Image&amp;w=1920&amp;h=500);">gbf</div> -->
+
+                {% for element in recepies %}
+                <div class="swiper-slide" style="padding: 100px;">
+
+                    <ul class="list-group">
+                        {% for tabac in element.tabaccos %}
+                        <li class="list-group-item {{ tabac.have }}"><span>{{ tabac.taste }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+
+            </div>
+            <!-- <div class="swiper-pagination"></div> -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <div class="features-boxed">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Табачок</h2>
+            </div>
+            <div class="row justify-content-center features">
+                {% for element in tabaccos %}
+                <div class="col-sm-6 col-md-5 col-lg-4 item">
+                    <div class="box"><i class="{{ element.icon }} icon"></i>
+                        <h3 class="name">{{ element.taste }}</h3>
+                        <p class="description">{{ element.mark }}{% if element.mass %}
+                            {{ element.mass }}мг
+                            {% endif %}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+
+</html>

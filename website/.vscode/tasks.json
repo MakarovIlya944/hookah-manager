@@ -1,0 +1,52 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Django: run server",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/manage.py","runserver"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Django: migrate",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/manage.py","migrate"],
+      "problemMatcher": [],
+      "dependsOn":["Django: migrate app"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Django: migrate app",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/manage.py","makemigrations", "website"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Django: create super user",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/manage.py","createsuperuser"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    }
+  ]
+}

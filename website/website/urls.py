@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HookahIndex.as_view()),
     path('add', HookahIndex.as_view(template='add')),
+    path('stat', HookahIndex.as_view(template='statistic')),
 ]

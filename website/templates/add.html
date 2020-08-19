@@ -1,23 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Hoohkah: add new</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static "assets/bootstrap/css/bootstrap.min.css" %}">
-    <link rel="stylesheet" href="{% static "assets/fonts/font-awesome.min.css" %}">
-    <link rel="stylesheet" href="{% static "assets/css/styles.min.css" %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
-    <script src="{% static "assets/js/jquery.min.js" %}"></script>
-    <script src="{% static "assets/bootstrap/js/bootstrap.min.js" %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-    <script src="{% static "assets/js/script.min.js" %}"></script>    
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block content %}
     <div class="container">
+        <form method="POST">
+            {% csrf_token %}
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-prepend"><span class="input-group-text">Вкус<br></span></div><input class="form-control" type="text" name="taste" required="" autocomplete="on">
@@ -31,7 +16,10 @@
                 <div class="input-group-prepend"><span class="input-group-text">Вес<br></span></div><input class="form-control" type="text" inputmode="numeric" name="mass" value="50">
                 <div class="input-group-append"></div>
             </div>
-        </div><button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center" type="button">Добавить<br></button></div>
+        </div>
+        <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center" type="submit">Добавить<br></button>
+        </form>
+    </div>
     <div class="container">
         <span class="text-center d-block">Табачок</span>
         <div class="table-responsive text-left">
@@ -41,6 +29,8 @@
                         <th>Вкус</th>
                         <th>Марка</th>
                         <th>Масса</th>
+                        <th>Изменить</th>
+                        <th>Удалить</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,12 +39,22 @@
                         <td>{{ tabac.taste }}</td>
                         <td>{{ tabac.mark }}</td>
                         <td>{{ tabac.mass }}</td>
+                        <td><i class="fa fa-edit"></i></i></td>
+                        <td>
+                            <form method="POST">
+                                {% csrf_token %}
+                            <input class="form-control" type="hidden" name="taste" value="{{ tabac.taste }}">
+                            <input class="form-control" type="hidden" name="mark" value="{{ tabac.mark }}">
+                            <input class="form-control" type="hidden" name="type" value="delete">
+                            <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center" type="submit">
+                                <i class="fa fa-close"></i>
+                            </button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-</body>
-
-</html>
+    {% endblock content %}

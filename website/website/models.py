@@ -1,5 +1,8 @@
 from django.db import models
 from django.db.models import Q
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Tabacco(models.Model):
 
@@ -12,7 +15,6 @@ class Tabacco(models.Model):
 
     def __str__(self):
         return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "любой" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
-
 
 class Recipe(models.Model):
 
@@ -46,3 +48,34 @@ class Recipe(models.Model):
     def __str__(self):
         tabaccos = self.TabaccoList.all()
         return '\n'.join([str(e) for e in tabaccos])
+
+class Feedback(models.Model):
+    FeedbackId = models.IntegerField(auto_created=True, primary_key=True)
+    TabaccoMark = models.OneToOneField(
+        Tabacco, blank=True, related_name="TabaccoMark", on_delete=models.CASCADE)
+    RecipeMark = models.OneToOneField(
+        Recipe, blank=True, related_name="RecipeMark", on_delete=models.CASCADE)
+    Mark = models.IntegerField(default=50)
+    
+    def __str__(self):
+        if self.RecipeMark:
+          return 'RecipeMark: ' + str(self.RecipeMark)
+        else:
+          if self.TabaccoMark:
+            return 'TabaccoMark: ' + str(self.TabaccoMark)
+          else:
+            return 'Empty Feedback'
+
+class Profile(models.Model):
+    User = models.OneToOneField(User, on_delete=models.CASCADE)
+    FeedbackList = models.ManyToManyField(
+        Feedback, blank=True, related_name="FeedbackList")
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
