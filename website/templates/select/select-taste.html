@@ -1,0 +1,21 @@
+<div class="input-group">
+    <div class="dropdown btn-group" role="group">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Вкус
+            табака</button>
+        <div role="menu" class="dropdown-menu">
+            {% for mark in marks %}
+            <div role="presentation" name="taste-dropdown-sup-{{ mark.grouper }}" class="dropdown-divider d-inline">
+            </div>
+            <h6 class="dropdown-header d-inline" name="taste-dropdown-sup-{{ mark.grouper }}" role="presentation">
+                {{ mark.grouper }}</h6>
+            {% for m in mark.list %}
+            <button onclick="changeTaste(true, this)" type="button" role="presentation" class="dropdown-item d-inline"
+                name="taste-dropdown-{{ mark.grouper }}">{{ m.taste }}</button>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="input-group-prepend"><span class="input-group-text">Вкус<br></span></div><input class="form-control"
+        type="text" id="input-taste" required="" name="taste" autocomplete="on" onchange="changeTaste(false)">
+    <div class="input-group-append"></div>
+</div>

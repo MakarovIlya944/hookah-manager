@@ -52,10 +52,11 @@ class Recipe(models.Model):
 class Feedback(models.Model):
     FeedbackId = models.IntegerField(auto_created=True, primary_key=True)
     TabaccoMark = models.OneToOneField(
-        Tabacco, blank=True, related_name="TabaccoMark", on_delete=models.CASCADE)
+        Tabacco,null=True, blank=True, related_name="TabaccoMark", on_delete=models.CASCADE)
     RecipeMark = models.OneToOneField(
-        Recipe, blank=True, related_name="RecipeMark", on_delete=models.CASCADE)
+        Recipe,null=True, blank=True, related_name="RecipeMark", on_delete=models.CASCADE)
     Mark = models.IntegerField(default=50)
+    Date = models.DateField(auto_now_add=True)
     
     def __str__(self):
         if self.RecipeMark:
@@ -65,17 +66,3 @@ class Feedback(models.Model):
             return 'TabaccoMark: ' + str(self.TabaccoMark)
           else:
             return 'Empty Feedback'
-
-class Profile(models.Model):
-    User = models.OneToOneField(User, on_delete=models.CASCADE)
-    FeedbackList = models.ManyToManyField(
-        Feedback, blank=True, related_name="FeedbackList")
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()

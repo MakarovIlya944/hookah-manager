@@ -70,6 +70,7 @@
             </div>
             <div class="row justify-content-center features">
                 {% for element in tabaccos %}
+                {% if element.have %}
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box"><i class="{{ element.icon }} icon"></i>
                         <h3 class="name">{{ element.taste }}</h3>
@@ -78,6 +79,7 @@
                             {% endif %}</p>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

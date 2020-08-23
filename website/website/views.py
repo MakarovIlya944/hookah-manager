@@ -29,12 +29,12 @@ class HookahIndex(View):
 
     def get(self, request, *args, **kwargs):
         page = self.template + '.html'
+        recepies = GetRecipies()
+        HookahIndex.recepies = sorted(recepies, key=lambda x: -x['value'])
+        tabaccos = Tabacco.objects.all()
+        HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'have': t.Have, 'mass': t.Mass if t.Mass != 0 else None}
+                                for t in tabaccos]
         if self.template != 'statistic':
-            recepies = GetRecipies()
-            HookahIndex.recepies = sorted(recepies, key=lambda x: -x['value'])
-            tabaccos = Tabacco.objects.all()
-            HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'have': t.Have, 'mass': t.Mass if t.Mass != 0 else None}
-                                    for t in tabaccos]
             return TemplateResponse(request, page, context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
         else:
             temp = Feedback.objects.all().exclude(TabaccoMark=None)
@@ -47,9 +47,9 @@ class HookahIndex(View):
                 feedbacks[f.TabaccoMark] = {"count":1,"mark":f.Mark}
             
             for f in feedbacks:
-              f["mark"] /= f["count"]
+              feedbacks[f]["mark"] /= feedbacks[f]["count"]
               
-            return TemplateResponse(request, page, context={'feedbacks': feedbacks})
+            return TemplateResponse(request, page, context={'feedbacks': feedbacks, 'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
 
     def post(self, request, *args, **kwargs):
 
@@ -77,5 +77,15 @@ class HookahIndex(View):
               t.Mass = mass
               t.Have = True
               t.save()
+          return redirect('/add')
+        elif request.path == '/stat':
+          if request.POST.get('taste') and request.POST.get('mark'):
+            if request.POST.get('type') == "tabac":
+              mass = request.POST.get('mass')
+              taste = request.POST.get('taste')
+              mark = request.POST.get('mark')
+              t = Tabacco.objects.get(Taste=taste, Mark=mark)
+              f = Feedback(TabaccoMark=t, Mark=mass, RecipeMark=None).save()
 
-        return redirect('/add')
+          return redirect('/stat')
+

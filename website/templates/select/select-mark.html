@@ -1,0 +1,15 @@
+<div class="input-group">
+    <div class="dropdown btn-group" role="group">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Марка
+            табака</button>
+        <div role="menu" class="dropdown-menu">
+            {% for mark in marks %}
+            <button type="button" role="presentation" class="dropdown-item d-inline" name="mark-dropdown"
+                onclick="changeMark(true, this)">{{ mark.grouper }}</button>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="input-group-prepend"><span class="input-group-text">Марка<br></span></div><input class="form-control"
+        type="text" id="input-mark" name="mark" autocomplete="on" onchange="changeMark(false)">
+    <div class="input-group-append"></div>
+</div>
