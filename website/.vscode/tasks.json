@@ -7,7 +7,18 @@
       "label": "Django: run server",
       "type": "shell",
       "command": "python",
-      "args": ["${workspaceFolder}/manage.py","runserver"],
+      "args": ["${workspaceFolder}/manage.py","runserver","80"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Django: run server outworld",
+      "type": "shell",
+      "command": "python",
+      "args": ["${workspaceFolder}/manage.py","runserver", "0.0.0.0:80"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

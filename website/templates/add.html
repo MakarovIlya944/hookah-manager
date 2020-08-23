@@ -2,7 +2,6 @@
 {% block content %}
 
 {% regroup tabaccos by mark as marks %}
-
 <div class="container">
     <form method="POST">
         {% csrf_token %}
@@ -19,44 +18,45 @@
                     </div>
                 </div>
                 <div class="input-group-prepend"><span class="input-group-text">Марка<br></span></div><input
-                    class="form-control" type="text" id="input-mark" autocomplete="on" onchange="changeMark(false)">
+                    class="form-control" type="text" id="input-mark" name="mark" autocomplete="on" onchange="changeMark(false)">
                 <div class="input-group-append"></div>
             </div>
-
             <div class="input-group">
                 <div class="dropdown btn-group" role="group">
                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"
                         type="button">Вкус табака</button>
                     <div role="menu" class="dropdown-menu">
                         {% for mark in marks %}
-                        <div role="presentation" name="taste-dropdown-sup-{{ mark.grouper }}" class="dropdown-divider d-inline"></div>
-                        <h6 class="dropdown-header d-inline" name="taste-dropdown-sup-{{ mark.grouper }}" role="presentation">{{ mark.grouper }}</h6>
+                        <div role="presentation" name="taste-dropdown-sup-{{ mark.grouper }}"
+                            class="dropdown-divider d-inline"></div>
+                        <h6 class="dropdown-header d-inline" name="taste-dropdown-sup-{{ mark.grouper }}"
+                            role="presentation">{{ mark.grouper }}</h6>
                         {% for m in mark.list %}
-                        <button onclick="changeTaste(true, this)" type="button"  role="presentation" class="dropdown-item d-inline"
+                        <button onclick="changeTaste(true, this)" type="button" role="presentation"
+                            class="dropdown-item d-inline"
                             name="taste-dropdown-{{ mark.grouper }}">{{ m.taste }}</button>
                         {% endfor %}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="input-group-prepend"><span class="input-group-text">Вкус<br></span></div><input
-                    class="form-control" type="text" id="input-taste" required="" autocomplete="on" onchange="changeTaste(false)">
+                    class="form-control" type="text" id="input-taste" required="" name="taste" autocomplete="on" onchange="changeTaste(false)">
                 <div class="input-group-append"></div>
             </div>
-
             <div class="input-group">
                 <div class="input-group-prepend"><span class="input-group-text">Вес<br></span></div><input
                     class="form-control" type="text" inputmode="numeric" name="mass" value="50"
                     onchange="changeMass('mass')">
                 <div class="input-group-append"></div>
+                <input type="range" class="border-success custom-range" name="mass-range" value="50" min="10" max="500"
+                    step="10" onchange="changeMass('mass-range')" onmousemove="changeMass('mass-range')" />
             </div>
-
-            <input type="range" class="border-success custom-range" name="mass-range" value="50" min="10" max="500"
-                step="10" onchange="changeMass('mass-range')" onmousemove="changeMass('mass-range')" />
         </div>
         <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center"
             type="submit">Добавить<br></button>
     </form>
 </div>
+
 <div class="container">
     <span class="text-center d-block">Табачок</span>
     <div class="table-responsive text-left">
@@ -72,6 +72,7 @@
             </thead>
             <tbody>
                 {% for tabac in tabaccos %}
+                {% if tabac.have %}
                 <tr>
                     <td>{{ tabac.taste }}</td>
                     <td>{{ tabac.mark }}</td>
@@ -91,6 +92,7 @@
                         </form>
                     </td>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </tbody>
         </table>
