@@ -58,7 +58,8 @@ class HookahIndex(View):
             taste = request.POST.get('taste')
             mark = request.POST.get('mark')
             t = Tabacco.objects.get(Mark=mark, Taste=taste)
-            t.delete()
+            t.Have = False
+            t.save()
 
           else:
             mass = request.POST.get('mass')
