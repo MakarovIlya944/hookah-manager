@@ -4,9 +4,29 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Django: run server with postgres",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": ["${workspaceFolder}/manage.py","runserver"],
+      "options": {
+        "env": {
+          "POSTGRES_PASSWORD": "weee",
+          "POSTGRES_DB": "site",
+          "POSTGRES_USER": "master",
+          "POSTGRES_HOST": "host.docker.internal",
+          "POSTGRES_PORT": "5432",
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+    },
+    {
       "label": "Django: run server",
       "type": "shell",
-      "command": "python",
+      "command": "${config:python.pythonPath}",
       "args": ["${workspaceFolder}/manage.py","runserver"],
       "problemMatcher": [],
       "presentation": {
@@ -17,8 +37,8 @@
     {
       "label": "Django: run server outworld",
       "type": "shell",
-      "command": "python",
-      "args": ["${workspaceFolder}/manage.py","runserver", "0.0.0.0:80"],
+      "command": "${config:python.pythonPath}",
+      "args": ["${workspaceFolder}/manage.py","runserver", "0.0.0.0:80", "--noreload"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -28,7 +48,7 @@
     {
       "label": "Django: migrate",
       "type": "shell",
-      "command": "python",
+      "command": "${config:python.pythonPath}",
       "args": ["${workspaceFolder}/manage.py","migrate"],
       "problemMatcher": [],
       "dependsOn":["Django: migrate app"],
@@ -40,7 +60,7 @@
     {
       "label": "Django: migrate app",
       "type": "shell",
-      "command": "python",
+      "command": "${config:python.pythonPath}",
       "args": ["${workspaceFolder}/manage.py","makemigrations", "website"],
       "problemMatcher": [],
       "presentation": {
@@ -51,8 +71,69 @@
     {
       "label": "Django: create super user",
       "type": "shell",
-      "command": "python",
+      "command": "${config:python.pythonPath}",
       "args": ["${workspaceFolder}/manage.py","createsuperuser"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Django: migrate with postgres",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": ["${workspaceFolder}/manage.py","migrate"],
+      "options": {
+        "env": {
+          "POSTGRES_PASSWORD": "weee",
+          "POSTGRES_DB": "site",
+          "POSTGRES_USER": "master",
+          "POSTGRES_HOST": "host.docker.internal",
+          "POSTGRES_PORT": "5432",
+        }
+      },
+      "problemMatcher": [],
+      "dependsOn":["Django: migrate app"],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Django: migrate app with postgres",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": ["${workspaceFolder}/manage.py","makemigrations", "website"],
+      "options": {
+        "env": {
+          "POSTGRES_PASSWORD": "weee",
+          "POSTGRES_DB": "site",
+          "POSTGRES_USER": "master",
+          "POSTGRES_HOST": "host.docker.internal",
+          "POSTGRES_PORT": "5432",
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Django: create super user with postgres",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": ["${workspaceFolder}/manage.py","createsuperuser"],
+      "options": {
+        "env": {
+          "POSTGRES_PASSWORD": "weee",
+          "POSTGRES_DB": "site",
+          "POSTGRES_USER": "master",
+          "POSTGRES_HOST": "host.docker.internal",
+          "POSTGRES_PORT": "5432",
+        }
+      },
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

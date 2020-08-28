@@ -1,12 +1,3 @@
-# Bootstrap studio
-
-## Windows
-- Script compile to exe
-
-```bat
-
-```
-
 # Django init
 
 ## Windows
@@ -22,4 +13,5 @@ python tobacco <path> <file>
 python tobacco <path> <file> --my
 ```
 
-## Linux
+## Docker
+

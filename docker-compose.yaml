@@ -1,0 +1,31 @@
+version: "3.4"
+services:
+  site:
+    image: hookah
+    # build:
+    #   context: .
+    container_name: site
+    command: [ "--noreload" ]
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: weee
+      POSTGRES_DB: site
+      POSTGRES_USER: master
+      POSTGRES_HOST: "host.docker.internal"
+      POSTGRES_PORT: "5432"
+  #   depends_on:
+  #     - db
+
+  # db:
+  #   image: postgres:11
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data:Z
+  #   environment:
+  #     POSTGRES_PASSWORD: weee
+  #     POSTGRES_DB: site
+  #     POSTGRES_USER: master
+
+volumes:
+  db_data:
