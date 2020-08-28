@@ -14,7 +14,7 @@ def GetRecipies():
 
     recepies = [{'tabaccos': [{'taste': str(t),
                                'have': 'list-group-item-primary'
-                               if ((t.Mark == 'любой' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Mark=t.Mark, Taste=t.Taste)) > 0)
+                               if ((t.Mark == 'any' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Mark=t.Mark, Taste=t.Taste)) > 0)
                                else 'list-group-item-danger'} for t in e.TabaccoList.all()],
                  'value': e.price()}
                 for e in recepies]
@@ -26,6 +26,7 @@ class HookahIndex(View):
     template = 'index'
     tabaccos = ''
     recepies = ''
+    selectorMarks = ''
 
     def get(self, request, *args, **kwargs):
         page = self.template + '.html'
@@ -35,13 +36,20 @@ class HookahIndex(View):
         HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'have': t.Have, 'mass': t.Mass if t.Mass != 0 else None}
                                 for t in tabaccos]
         marks = list(Tabacco.objects.values('Mark').distinct())
+        marks = [m["Mark"] for m in marks]
+        HookahIndex.selectorMarks = {}
+        for i,m in enumerate(marks):
+          HookahIndex.selectorMarks[m] = []
+          for t in HookahIndex.tabaccos:
+            if t["mark"] == m:
+              HookahIndex.selectorMarks[m].append(t["taste"])
+        
         if self.template != 'statistic':
-            return TemplateResponse(request, page, context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
+            return TemplateResponse(request, page, context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies, 'selectors': HookahIndex.selectorMarks})
         else:
             temp = Feedback.objects.all().exclude(TabaccoMark=None)
             feedbacks = []
             for f in temp:
-
               for el in feedbacks:
                 if el["title"] == f.TabaccoMark.short():
                   el["count"] += 1
@@ -53,7 +61,7 @@ class HookahIndex(View):
               f["mark"] /= f["count"]
               
             # sorted(feedbacks, key=lambda x: x["mark"])
-            return TemplateResponse(request, page, context={'feedbacks': feedbacks, 'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
+            return TemplateResponse(request, page, context={'feedbacks': feedbacks, 'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies, 'selectors': HookahIndex.selectorMarks})
 
     def post(self, request, *args, **kwargs):
 

@@ -7,17 +7,17 @@ from django.dispatch import receiver
 class Tabacco(models.Model):
 
     TobaccoId = models.IntegerField(auto_created=True, primary_key=True)
-    Mark = models.CharField(max_length=32, default='любой')
+    Mark = models.CharField(max_length=32, default='any')
     Taste = models.CharField(max_length=32)
     Icon = models.CharField(max_length=32, default='fa fa-leaf')
     Mass = models.IntegerField(default=0)
     Have = models.BooleanField(default=False)
 
     def short(self):
-        return self.Taste + ((": " + self.Mark) if self.Mark and str(self.Mark) != "любой" else "")
+        return self.Taste + ((": " + self.Mark) if self.Mark and str(self.Mark) != "any" else "")
 
     def __str__(self):
-        return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "любой" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
+        return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "any" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
 
 class Recipe(models.Model):
 
@@ -41,7 +41,7 @@ class Recipe(models.Model):
         recipe = self.TabaccoList.all()
         a = 0
         for t in recipe:
-            if (t.Mark == 'любой' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Mark=t.Mark, Taste=t.Taste)) > 0:
+            if (t.Mark == 'any' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Mark=t.Mark, Taste=t.Taste)) > 0:
                 a += 1
         if a:
             return a / len(recipe)

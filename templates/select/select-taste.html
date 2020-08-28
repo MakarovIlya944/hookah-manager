@@ -3,14 +3,14 @@
         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true" type="button">Вкус
             табака</button>
         <div role="menu" class="dropdown-menu">
-            {% for mark in marks %}
-            <div role="presentation" name="taste-dropdown-sup-{{ mark.grouper }}" class="dropdown-divider d-inline">
+            {% for key, val in selectors.items %}
+            <div role="presentation" name="taste-dropdown-sup-{{ key }}" class="dropdown-divider d-inline">
             </div>
-            <h6 class="dropdown-header d-inline" name="taste-dropdown-sup-{{ mark.grouper }}" role="presentation">
-                {{ mark.grouper }}</h6>
-            {% for m in mark.list %}
+            <h6 class="dropdown-header d-inline" name="taste-dropdown-sup-{{ key }}" role="presentation">
+                {{ key }}</h6>
+            {% for t in val %}
             <button onclick="changeTaste(true, this)" type="button" role="presentation" class="dropdown-item d-inline"
-                name="taste-dropdown-{{ mark.grouper }}">{{ m.taste }}</button>
+                name="taste-dropdown-{{ key }}">{{ t }}</button>
             {% endfor %}
             {% endfor %}
         </div>

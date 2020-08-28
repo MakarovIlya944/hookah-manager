@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% regroup tabaccos by mark as marks %}
 <div class="container">
     <form method="POST">
         {% csrf_token %}

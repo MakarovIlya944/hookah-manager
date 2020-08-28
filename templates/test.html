@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{{ selectors }}
+<br>
+{% for k,v in selectors.items %}
+{{k}}<br>
+{{ v }}<br>
+----------------------------------------<br>
+{% endfor %}
+{% endblock content %}

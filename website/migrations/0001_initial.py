@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='Tabacco',
             fields=[
                 ('TobaccoId', models.IntegerField(auto_created=True, primary_key=True, serialize=False)),
-                ('Mark', models.CharField(default='любой', max_length=32)),
+                ('Mark', models.CharField(default='any', max_length=32)),
                 ('Taste', models.CharField(max_length=32)),
                 ('Icon', models.CharField(default='fa fa-leaf', max_length=32)),
                 ('Mass', models.IntegerField(default=0)),

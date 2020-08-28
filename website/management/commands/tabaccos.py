@@ -12,7 +12,7 @@ def read_mixes(file):
 def construct_tobacco(data):
     if type(data) == str:
         taste = data
-        mark = 'любой'
+        mark = 'any'
     else:
         taste = data.get('taste')
         mark = data.get('mark')
@@ -22,7 +22,7 @@ def construct_tobacco(data):
         return Tabacco.objects.get(Taste=taste, Mark=mark)
     except Exception:
         try:
-            t = Tabacco.objects.get(Taste=taste, Mark='любой')
+            t = Tabacco.objects.get(Taste=taste, Mark='any')
             t.Mark = mark
             t.Save()
         except Exception:
