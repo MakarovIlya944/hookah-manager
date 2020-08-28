@@ -1,20 +1,22 @@
 version: "3.4"
 services:
   site:
-    # image: mindbreez/site
-    build:
-      context: .
+    image: mindbreez/site:0.0.3
+    # build:
+    #   context: .
     container_name: site
-    command: [  "0.0.0.0:8080", "--noreload" ]
+    command: [ "--noreload" ]
     ports:
-      - "8080:8080"
+      - "6060:8080"
     restart: always
     environment:
+      ENVIRONMENT: dev
       POSTGRES_PASSWORD: weee
       POSTGRES_DB: site
       POSTGRES_USER: master
       POSTGRES_HOST: database
       POSTGRES_PORT: "5432"
+      SENTRY_SDK: "https://e9a0d61a572543f9ba73e6c509b9343b@o336706.ingest.sentry.io/5409851"
     volumes:
       - ./website/data:/data
   #   depends_on:
