@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block base_content %}
+<div class="highlight-blue">
+  <div class="container">
+      <div class="intro">
+          <h2 class="text-center">Вы успешно вышли</h2>
+      </div>
+      <div class="buttons"><a class="btn btn-primary" role="button" href="{% url 'login'%}">Войти</a></div>
+  </div>
+</div>
+{% endblock base_content %}

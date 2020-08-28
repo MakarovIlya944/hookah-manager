@@ -9,53 +9,9 @@
 </head>
 
 <body>
-
-    {% include "navbar.html" %}
-    {% block content %}
-    <div class="simple-slider">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <!-- <div class="swiper-slide" style="background-image:url(https://placeholdit.imgix.net/~text?txtsize=68&amp;txt=Slideshow+Image&amp;w=1920&amp;h=500);">gbf</div> -->
-
-                {% for element in recepies %}
-                <div class="swiper-slide" style="padding: 100px;">
-
-                    <ul class="list-group">
-                        {% for tabac in element.tabaccos %}
-                        <li class="list-group-item {{ tabac.have }}"><span>{{ tabac.taste }}</span></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% endfor %}
-
-            </div>
-            <!-- <div class="swiper-pagination"></div> -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
-    </div>
-    <div class="features-boxed">
-        <div class="container">
-            <div class="intro">
-                <h2 class="text-center">Табачок</h2>
-            </div>
-            <div class="row justify-content-center features">
-                {% for element in tabaccos %}
-                {% if element.have %}
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box"><i class="{{ element.icon }} icon"></i>
-                        <h3 class="name">{{ element.taste }}</h3>
-                        <p class="description">{{ element.mark }}{% if element.mass %}
-                            {{ element.mass }}мг
-                            {% endif %}</p>
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endblock content %}
+    {% block base_content %}
+    
+    {% endblock base_content %}
 </body>
 
 </html>
