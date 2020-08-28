@@ -14,7 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls import url
 from website.views import HookahIndex
 
 urlpatterns = [
@@ -22,5 +23,6 @@ urlpatterns = [
     path('', HookahIndex.as_view()),
     path('add', HookahIndex.as_view(template='add')),
     path('stat', HookahIndex.as_view(template='statistic')),
-    path('test', HookahIndex.as_view(template='test')),
+    path('test', HookahIndex.as_view(template='login')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
