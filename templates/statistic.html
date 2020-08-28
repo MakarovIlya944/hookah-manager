@@ -20,10 +20,6 @@
       type="submit">Добавить<br></button>
   </form>
 </div>
-{% for feedback, value in feedbacks %}
-{{feedback}}
-{{ value }}
-{% endfor %}
 <div class="row match-height">
   <!-- Table -->
   <div class="col-xl-8 col-lg-12">
@@ -42,10 +38,10 @@
             </thead>
             <tbody>
 
-              {% for feedback in feedbacks %}
+              {% for feedback in feedbacks|dictsortreversed:"mark" %}
               <tr>
                 <td class="text-truncate">
-                  <span class="text-truncate">{{ feedback.name }}</span>
+                  <span class="text-truncate">{{ feedback.title }}</span>
                 </td>
                 <td class="text-truncate">
                   {{ feedback.count }}

@@ -34,21 +34,25 @@ class HookahIndex(View):
         tabaccos = Tabacco.objects.all()
         HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'have': t.Have, 'mass': t.Mass if t.Mass != 0 else None}
                                 for t in tabaccos]
+        marks = list(Tabacco.objects.values('Mark').distinct())
         if self.template != 'statistic':
             return TemplateResponse(request, page, context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
         else:
             temp = Feedback.objects.all().exclude(TabaccoMark=None)
-            feedbacks = {}
+            feedbacks = []
             for f in temp:
-              if f.TabaccoMark in feedbacks:
-                feedbacks[f.TabaccoMark]["count"] += 1
-                feedbacks[f.TabaccoMark]["mark"] += f.Mark
+
+              for el in feedbacks:
+                if el["title"] == f.TabaccoMark.short():
+                  el["count"] += 1
+                  el["mark"] += f.Mark
+                  break
               else:
-                feedbacks[f.TabaccoMark] = {"count":1,"mark":f.Mark}
-            
+                feedbacks.append({"title":f.TabaccoMark.short() ,"count":1,"mark":f.Mark})
             for f in feedbacks:
-              feedbacks[f]["mark"] /= feedbacks[f]["count"]
+              f["mark"] /= f["count"]
               
+            # sorted(feedbacks, key=lambda x: x["mark"])
             return TemplateResponse(request, page, context={'feedbacks': feedbacks, 'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
 
     def post(self, request, *args, **kwargs):

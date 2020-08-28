@@ -7,7 +7,7 @@
       "label": "Django: run server",
       "type": "shell",
       "command": "python",
-      "args": ["${workspaceFolder}/manage.py","runserver","80"],
+      "args": ["${workspaceFolder}/manage.py","runserver"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

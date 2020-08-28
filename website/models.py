@@ -13,6 +13,9 @@ class Tabacco(models.Model):
     Mass = models.IntegerField(default=0)
     Have = models.BooleanField(default=False)
 
+    def short(self):
+        return self.Taste + ((": " + self.Mark) if self.Mark and str(self.Mark) != "любой" else "")
+
     def __str__(self):
         return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "любой" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
 
