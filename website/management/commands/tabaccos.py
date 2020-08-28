@@ -31,15 +31,15 @@ def construct_tobacco(data):
 
 
 class Command(BaseCommand):
-    help = 'Read recepies from file'
+    help = 'Read and write recepies from file'
 
     def add_arguments(self, parser):
-        parser.add_argument('mode', nargs='+', type=str)
-        parser.add_argument('file', nargs='+', type=str)
+        parser.add_argument('mode', nargs=1, type=str, help="Can be read or write")
+        parser.add_argument('file', nargs='+', type=str, help="Processing file")
         parser.add_argument('--my',
                             action='store_true',
                             dest='my',
-                            default=False)
+                            default=False, help="Processing file contains only tabaccos")
 
     def handle(self, *args, **options):
         if options["mode"][0] == "read":
@@ -94,3 +94,8 @@ class Command(BaseCommand):
 
                 self.stdout.write(self.style.SUCCESS(
                     f'Added {len(data)} recipies'))
+        elif options["mode"][0] == "write":
+            with open(options["file"][0], 'wb') as f:
+                f.write(json.dumps([r.toJson() for r in Recipe.objects.all()], ensure_ascii=False).encode('utf-8'))
+            with open(options["file"][1], 'wb') as f:
+                f.write(json.dumps([r.toJson() for r in Tabacco.objects.all()], ensure_ascii=False).encode('utf-8'))

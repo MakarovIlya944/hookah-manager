@@ -1,11 +1,11 @@
 version: "3.4"
 services:
   site:
-    image: hookah
-    # build:
-    #   context: .
+    # image: mindbreez/site
+    build:
+      context: .
     container_name: site
-    command: [ "--noreload" ]
+    command: [  "0.0.0.0:8080", "--noreload" ]
     ports:
       - "8080:8080"
     restart: always
@@ -13,19 +13,21 @@ services:
       POSTGRES_PASSWORD: weee
       POSTGRES_DB: site
       POSTGRES_USER: master
-      POSTGRES_HOST: "host.docker.internal"
+      POSTGRES_HOST: database
       POSTGRES_PORT: "5432"
+    volumes:
+      - ./website/data:/data
   #   depends_on:
-  #     - db
+  #     - database
 
-  # db:
-  #   image: postgres:11
-  #   volumes:
-  #     - db_data:/var/lib/postgresql/data:Z
-  #   environment:
-  #     POSTGRES_PASSWORD: weee
-  #     POSTGRES_DB: site
-  #     POSTGRES_USER: master
+  database:
+    image: postgres:11
+    volumes:
+      - db_data:/var/lib/postgresql/data:Z
+    environment:
+      POSTGRES_PASSWORD: weee
+      POSTGRES_DB: site
+      POSTGRES_USER: master
 
 volumes:
   db_data:

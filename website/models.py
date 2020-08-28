@@ -6,7 +6,6 @@ from django.dispatch import receiver
 
 class Tabacco(models.Model):
 
-    TobaccoId = models.IntegerField(auto_created=True, primary_key=True)
     Mark = models.CharField(max_length=32, default='any')
     Taste = models.CharField(max_length=32)
     Icon = models.CharField(max_length=32, default='fa fa-leaf')
@@ -15,6 +14,14 @@ class Tabacco(models.Model):
 
     def short(self):
         return self.Taste + ((": " + self.Mark) if self.Mark and str(self.Mark) != "any" else "")
+
+    def toJson(self):
+        return {
+            'have':self.Have, 
+            'mass':self.Mass,
+            'taste':self.Taste, 
+            'mark':self.Mark,
+            }
 
     def __str__(self):
         return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "any" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
@@ -29,7 +36,6 @@ class Recipe(models.Model):
         ('VINE', 'vine'),
     )
 
-    RecipeId = models.IntegerField(auto_created=True, primary_key=True)
     TabaccoList = models.ManyToManyField(Tabacco, related_name="TabaccoList")
     OptionalList = models.ManyToManyField(
         Tabacco, blank=True, related_name="OptionalList")
@@ -47,13 +53,20 @@ class Recipe(models.Model):
             return a / len(recipe)
         else:
             return -len(recipe)
+    def toJson(self):
+        return {
+            'options': [o.toJson() for o in self.OptionalList.all()],
+            'tabaccos': [t.toJson() for t in self.TabaccoList.all()],
+            'flask': str(self.Flask),
+            'desc' : str(self.Description)
+        }
 
     def __str__(self):
         tabaccos = self.TabaccoList.all()
         return '\n'.join([str(e) for e in tabaccos])
 
 class Feedback(models.Model):
-    FeedbackId = models.IntegerField(auto_created=True, primary_key=True)
+    
     TabaccoMark = models.OneToOneField(
         Tabacco,null=True, blank=True, related_name="TabaccoMark", on_delete=models.CASCADE)
     RecipeMark = models.OneToOneField(
