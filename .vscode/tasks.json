@@ -35,6 +35,37 @@
       }
     },
     {
+      "label": "Docker: push",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "push",
+        "mindbreez/site:0.0.3"
+      ],
+      "dependsOn":["Docker: build"],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Docker: build",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "build",
+        "-t",
+        "mindbreez/site:0.0.3",
+        "."
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
       "label": "Django: run server outworld",
       "type": "shell",
       "command": "${config:python.pythonPath}",

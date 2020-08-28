@@ -58,7 +58,7 @@ class Command(BaseCommand):
                         elif t.Mark == 'dailyhookah':
                             t.Icon = 'icon-support'
                         t.Mass = r.get('mass')
-                        t.Have = True
+                        t.Have = r.get('have')
                         t.save()
                         print(str(t))
                         i += 1
@@ -68,25 +68,22 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(
                     f'Added {i} tabaccos'))
             else:
-                i = len(Recipe.objects.all())
                 for r in data:
                     try:
                         tobac_list = []
                         optional_list = []
                         flask = "water"
                         desc = ""
-                        for t in r["recipe"]:
-                            # R.TabaccoList.add(construct_tobacco(t))
+                        for t in r["tabaccos"]:
                             tobac_list.append(construct_tobacco(t))
-                        R = Recipe.objects.create(RecipeId=i, Flask=r.get(
-                            'flask') or flask, Description=r.get('description') or desc)
+                        R = Recipe.objects.create(Flask=r.get(
+                            'flask') or flask, Description=r.get('desc') or desc)
                         R.TabaccoList.set(tobac_list)
-                        if r.get("optional"):
-                            for t in r["optional"]:
+                        if r.get("options"):
+                            for t in r["options"]:
                                 optional_list.append(construct_tobacco(t))
                         R.OptionalList.set(optional_list)
                         R.save()
-                        i += 1
                         print(str(t))
                     except Exception as ex:
                         print(ex.args)

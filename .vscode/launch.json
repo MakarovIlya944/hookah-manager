@@ -16,18 +16,17 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}\\manage.py",
-                "env": {
-                  "POSTGRES_PASSWORD": "weee",
-                  "POSTGRES_DB": "site",
-                  "POSTGRES_USER": "master",
-                  "POSTGRES_HOST": "localhost",
-                  "POSTGRES_PORT": "5432",
-                },
+                // "env": {
+                //   "POSTGRES_PASSWORD": "weee",
+                //   "POSTGRES_DB": "site",
+                //   "POSTGRES_USER": "master",
+                //   "POSTGRES_HOST": "localhost",
+                //   "POSTGRES_PORT": "5432",
+                // },
             "args": [
                 "tabaccos",
                 "read",
-                "website\\data\\tabaccos.json",
-                "--my",
+                "website\\data\\recipe.json",
             ],
             "console": "integratedTerminal"
         },
