@@ -1,17 +1,19 @@
 {% extends "base.html" %}
-{% block content %}
 
-<div class="btn-toolbar">
-  <div role="group" class="btn-group">
-    <button class="btn btn-primary" type="button" id="tabac" onclick="changeStatButton(true)">Табачки</button>
-    <button class="btn btn-secondary" type="button" id="recipe" onclick="changeStatButton(false)">Забивочки</button>
+{% block content %}
+<div class="container text-center" style="margin-top: 30px;margin-bottom: 0px;">
+  <div class="btn-toolbar">
+    <div role="group" class="btn-group">
+      <button class="btn btn-primary" type="button" id="tabac" onclick="changeStatButton(true)">Табачки</button>
+      <button class="btn btn-secondary" type="button" id="recipe" onclick="changeStatButton(false)">Забивочки</button>
+    </div>
   </div>
 </div>
 
-<div class="container">
+<div class="container text-center" style="margin-top: 0px;">
   <form method="POST">
     {% csrf_token %}
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 0px;">
       {% include "select/select-stat.html" %}
       <input class="form-control" type="hidden" name="type" value="tabac">
     </div>
@@ -19,35 +21,32 @@
       type="submit">Добавить<br></button>
   </form>
 </div>
-<div class="row match-height">
+<div class="container" style="margin-top: 30px;">
   <!-- Table -->
-  <div class="col-xl-8 col-lg-12">
-    <div class="card active-users">
+  <div class="table-responsive text-left">
 
-      <div class="card-content">
-        <div id="audience-list-scroll" class="table-responsive position-relative">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Название</th>
-                <th>Оценили</th>
-                <th>Средняя оценка</th>
-                <th>Действия</th>
-              </tr>
-            </thead>
-            <tbody>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Оценили</th>
+        <th>Средняя оценка</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
 
-              {% for feedback in feedbacks|dictsortreversed:"mark" %}
-              <tr>
-                <td class="text-truncate">
-                  <span class="text-truncate">{{ feedback.title }}</span>
-                </td>
-                <td class="text-truncate">
-                  {{ feedback.count }}
-                </td>
-                <td class="align-middle">
-                  <div class="progress my-75">
-                    <div class="progress-bar progress-bar-striped 
+      {% for feedback in feedbacks|dictsortreversed:"mark" %}
+      <tr>
+        <td class="text-truncate">
+          <span class="text-truncate">{{ feedback.title }}</span>
+        </td>
+        <td class="text-truncate">
+          {{ feedback.count }}
+        </td>
+        <td class="align-middle">
+          <div class="progress my-75">
+            <div class="progress-bar progress-bar-striped 
                       {% if feedback.mark > 75 %}
                       bg-primary
                       {% else %}
@@ -62,31 +61,28 @@
                         {% endif %}
                       {% endif %}
                       " role="progressbar" aria-valuenow="20" aria-valuemin="20" aria-valuemax="100"
-                      style="width:{{ feedback.mark }}%">{{ feedback.mark }}%</div>
-                  </div>
-                </td>
-                <td class="align-middle">
-                  <div class="dropdown">
-                    <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton"
-                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    </span>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton"
-                      x-placement="bottom-end"
-                      style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 18px, 0px);"
-                      x-out-of-boundaries="">
-                      <a class="dropdown-item" href="#">Изменить</a>
-                      <a class="dropdown-item" href="#">Удалить</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+              style="width:{{ feedback.mark }}%">{{ feedback.mark }}%</div>
+          </div>
+        </td>
+        <td class="align-middle">
+          <div class="dropdown">
+            <span class="feather icon-more-vertical dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+            </span>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" x-placement="bottom-end"
+              style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 18px, 0px);"
+              x-out-of-boundaries="">
+              <a class="dropdown-item" href="#">Изменить</a>
+              <a class="dropdown-item" href="#">Удалить</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
+
+</div>
 </div>
 {% endblock %}
