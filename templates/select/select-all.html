@@ -5,7 +5,7 @@
         class="form-control" type="text" inputmode="numeric" id="mass" name="mass" value="50"
         onchange="changeMass('mass')">
     <div class="input-group-append"></div>
-    <input type="range" class="border-success custom-range" id="mass-range" value="{% block valueCurrent %}50{% endblock %}" min="{% block valueMin %}10{% endblock %}" max="{% block valueMax %}100{% endblock %}"
+    <input type="range" class="border-success custom-range" id="mass-range" value="{% block valueCurrent %}50{% endblock %}" min="{% block valueMin %}10{% endblock %}" max="{% block valueMax %}200{% endblock %}"
         step="{% block valueStep %}10{% endblock %}" onchange="changeMass('mass-range')" onmousemove="changeMass('mass-range')" />
 </div>
 

@@ -1,6 +1,24 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Hoohkah</title>
-  {% include "static.html" %}
-</head>
+{% extends "base.html" %}
+{% block base_content %}
+<div class="swiper-container">
+  <!-- Parallax background element -->
+  <div class="parallax-bg" style="background-image:url(static/assets/img/parallax.jpg)" data-swiper-parallax="-23%">
+  </div>
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <!-- Each slide has parallax title -->
+      <div class="title" data-swiper-parallax="-300">Slide 1</div>
+      <!-- Parallax subtitle -->
+      <div class="subtitle" data-swiper-parallax="-400">Subtitle</div>
+      <!-- And parallax text with custom transition duration -->
+      <div class="text" data-swiper-parallax="-500" data-swiper-parallax-duration="800">
+        <p>Lorem ipsum dolor sit amet, ...</p>
+      </div>
+      <!-- Opacity parallax -->
+      <div data-swiper-parallax-opacity="0.5">I will change opacity</div>
+      <!-- Scale parallax -->
+      <div data-swiper-parallax-scale="0.15">I will change scale</div>
+    </div>
+  </div>
+</div>
+{% endblock base_content %}
