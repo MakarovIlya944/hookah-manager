@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'website',
 ]
 
+AUTH_USER_MODEL = 'website.Hooker'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

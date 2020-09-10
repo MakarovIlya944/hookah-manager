@@ -3,28 +3,37 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
+
+class Taste(models.Model):
+
+    Taste = models.CharField(max_length=32)
+
+class Hooker(AbstractUser):
+    pass
 
 class Tabacco(models.Model):
 
     Mark = models.CharField(max_length=32, default='any')
-    Taste = models.CharField(max_length=32)
+    Name = models.CharField(max_length=32)
     Icon = models.CharField(max_length=32, default='fa fa-leaf')
     Mass = models.IntegerField(default=0)
-    Have = models.BooleanField(default=False)
+    Tastes = models.ManyToManyField(
+        Taste, related_name="Tastes")
 
     def short(self):
-        return self.Taste + ((": " + self.Mark) if self.Mark and str(self.Mark) != "any" else "")
+        return "self.Taste" + ((": " + self.Mark) if self.Mark and str(self.Mark) != "any" else "")
 
     def toJson(self):
         return {
             'have':self.Have, 
             'mass':self.Mass,
-            'taste':self.Taste, 
+            'taste':"self.Taste", 
             'mark':self.Mark,
             }
 
     def __str__(self):
-        return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "any" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
+        return f'Taste: self.Taste {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "any" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
 
 class Recipe(models.Model):
 
