@@ -1,15 +1,14 @@
 from django.views import View
 from django.template.response import TemplateResponse
-from website.models import Recipe, Tabacco, Feedback
-from website.management.commands.tabaccos import construct_tobacco
+from .models import *
+from .management.commands.tabaccos import construct_tobacco
 from django.shortcuts import redirect
 from django.db.models import Q
 
 
-# Create your views here.
-
-def GetRecipies():
-    tabaccos = Tabacco.objects.filter(Have=True).all()
+def GetRecipies(username):
+    tabaccos = Hooker(username=username).Tabaccos
+    tabaccos = [t for t in tabaccos]
     recepies = Recipe.objects.all()
 
     recepies = [{'tabaccos': [{'taste': str(t),
@@ -30,7 +29,7 @@ class HookahIndex(View):
 
     def get(self, request, *args, **kwargs):
         page = self.template + '.html'
-        recepies = GetRecipies()
+        recepies = GetRecipies(request.user.username)
         HookahIndex.recepies = sorted(recepies, key=lambda x: -x['value'])
         tabaccos = Tabacco.objects.all()
         HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'have': t.Have, 'mass': t.Mass if t.Mass != 0 else None}

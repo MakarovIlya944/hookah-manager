@@ -27,7 +27,7 @@
       "label": "Django: run server",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","runserver"],
+      "args": ["${workspaceFolder}/manage.py","runserver", "8080"],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
