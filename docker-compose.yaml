@@ -1,7 +1,7 @@
 version: "3.4"
 services:
   site:
-    image: mindbreez/site:0.0.3
+    image: mindbreez/site:0.1.0
     # build:
     #   context: .
     container_name: site
@@ -22,14 +22,14 @@ services:
   #   depends_on:
   #     - database
 
-  database:
-    image: postgres:11
-    volumes:
-      - db_data:/var/lib/postgresql/data:Z
-    environment:
-      POSTGRES_PASSWORD: weee
-      POSTGRES_DB: site
-      POSTGRES_USER: master
+  # database:
+  #   image: postgres:11
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data:Z
+  #   environment:
+  #     POSTGRES_PASSWORD: weee
+  #     POSTGRES_DB: site
+  #     POSTGRES_USER: master
 
 volumes:
   db_data:
