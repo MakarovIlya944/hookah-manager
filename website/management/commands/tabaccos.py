@@ -78,7 +78,7 @@ class Command(BaseCommand):
                             tobac_list.append(construct_tobacco(t))
                         R = Recipe.objects.create(Flask=r.get(
                             'flask') or flask, Description=r.get('desc') or desc)
-                        R.TabaccoList.set(tobac_list)
+                        R.Tabaccos.set(tobac_list)
                         if r.get("options"):
                             for t in r["options"]:
                                 optional_list.append(construct_tobacco(t))

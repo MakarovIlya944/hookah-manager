@@ -6,97 +6,105 @@ from django.shortcuts import redirect
 from django.db.models import Q
 
 
-def GetRecipies(username):
-    tabaccos = Hooker(username=username).Tabaccos
-    tabaccos = [t for t in tabaccos]
-    recepies = Recipe.objects.all()
+def GetHookerRecipies(username):
+  tabaccos = Tabacco.objects.filter(Keepers__username=username)
+  tabaccos = [t for t in tabaccos]
+  allrecepies = Recipe.objects.all()
+  recepies = []
+  for r in allrecepies:
+    rtabacs = []
+    if r.Tabaccos:
+      for t in r.Tabaccos.all():
+        rtabacs.append({'name': str(t)})
+        if (len(tabaccos.filter(Brand=t.Brand, Taste=t.Taste)) > 0):
+          rtabacs[-1]['have'] = 'list-group-item-primary'
+        else:
+          rtabacs[-1]['have'] = 'list-group-item-danger'
+    else:
+      rtabacs.append({'taste': str(t)})
+      if (len(tabaccos.filter(Taste__Taste=t.Taste)) > 0):
+        rtabacs[-1]['have'] = 'list-group-item-primary'
+      else:
+        rtabacs[-1]['have'] = 'list-group-item-danger'
+    recepies.append({'tabaccos': rtabacs, 'value':r.price(username)})
 
-    recepies = [{'tabaccos': [{'taste': str(t),
-                               'have': 'list-group-item-primary'
-                               if ((t.Mark == 'any' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Mark=t.Mark, Taste=t.Taste)) > 0)
-                               else 'list-group-item-danger'} for t in e.TabaccoList.all()],
-                 'value': e.price()}
-                for e in recepies]
-    return recepies
+  return sorted(recepies, key=lambda x: -x['value'])
 
+def GetHookerTabaccos(username):
+  tabaccos = Tabacco.objects.filter(Keepers__username=username)
+  return [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Taste), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+
+def GetSelectors():
+  tabaccos = Tabacco.objects.all()
+  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Taste), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+  marks = list(Tabacco.objects.values('Mark').distinct())
+  marks = [m["Mark"] for m in marks]
+  selectorMarks = {}
+  for i,m in enumerate(marks):
+    selectorMarks[m] = []
+    for t in tabaccos:
+      if t["mark"] == m:
+        selectorMarks[m].append(t["taste"])
+  return selectorMarks
+
+def GetTabaccosStat():
+  temp = Feedback.objects.all().exclude(TabaccoBrand=None)
+  feedbacks = []
+  for f in temp:
+    for el in feedbacks:
+      if el["title"] == f.TabaccoBrand.short():
+        el["count"] += 1
+        el["mark"] += f.Mark
+        break
+    else:
+      feedbacks.append({"title":f.TabaccoBrand.short() ,"count":1,"mark":f.Mark})
+  for f in feedbacks:
+    f["mark"] /= f["count"]
 
 class HookahIndex(View):
 
-    template = 'index'
-    tabaccos = ''
-    recepies = ''
-    selectorMarks = ''
+  template = 'index'
 
-    def get(self, request, *args, **kwargs):
-        page = self.template + '.html'
-        recepies = GetRecipies(request.user.username)
-        HookahIndex.recepies = sorted(recepies, key=lambda x: -x['value'])
-        tabaccos = Tabacco.objects.all()
-        HookahIndex.tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'have': t.Have, 'mass': t.Mass if t.Mass != 0 else None}
-                                for t in tabaccos]
-        marks = list(Tabacco.objects.values('Mark').distinct())
-        marks = [m["Mark"] for m in marks]
-        HookahIndex.selectorMarks = {}
-        for i,m in enumerate(marks):
-          HookahIndex.selectorMarks[m] = []
-          for t in HookahIndex.tabaccos:
-            if t["mark"] == m:
-              HookahIndex.selectorMarks[m].append(t["taste"])
-        
-        if self.template != 'statistic':
-            return TemplateResponse(request, page, context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies, 'selectors': HookahIndex.selectorMarks})
+  def get(self, request, *args, **kwargs):
+    page = self.template + '.html'
+    recepies = GetHookerRecipies(request.user.username)
+    tabaccos = GetHookerTabaccos(request.user.username)
+    selectorMarks = GetSelectors()
+    context = {'tabaccos': tabaccos, 'recepies': recepies, 'selectors': selectorMarks}
+    
+    if self.template != 'statistic':
+      return TemplateResponse(request, page, context=context)
+    else:
+      context['feedbacks'] = GetTabaccosStat()
+      return TemplateResponse(request, page, context=context)
+
+  def post(self, request, *args, **kwargs):
+    if request.path == '/add':
+      if request.POST.get('taste') and request.POST.get('mark'):
+        if request.POST.get('type') == "delete":
+          taste = request.POST.get('taste')
+          mark = request.POST.get('mark')
+          t = Tabacco.objects.get(Mark=mark, Taste=taste)
+          t.Have = False
+          t.save()
+
         else:
-            temp = Feedback.objects.all().exclude(TabaccoMark=None)
-            feedbacks = []
-            for f in temp:
-              for el in feedbacks:
-                if el["title"] == f.TabaccoMark.short():
-                  el["count"] += 1
-                  el["mark"] += f.Mark
-                  break
-              else:
-                feedbacks.append({"title":f.TabaccoMark.short() ,"count":1,"mark":f.Mark})
-            for f in feedbacks:
-              f["mark"] /= f["count"]
-              
-            # sorted(feedbacks, key=lambda x: x["mark"])
-            return TemplateResponse(request, page, context={'feedbacks': feedbacks, 'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies, 'selectors': HookahIndex.selectorMarks})
+          mass = request.POST.get('mass')
+          taste = request.POST.get('taste')
+          mark = request.POST.get('mark')
+          t = construct_tobacco({'mark': mark, 'taste': taste})
+          t.Mass = mass
+          t.Have = True
+          t.save()
+      return redirect('/add')
+    elif request.path == '/stat':
+      if request.POST.get('taste') and request.POST.get('mark'):
+        if request.POST.get('type') == "tabac":
+          mass = request.POST.get('mass')
+          taste = request.POST.get('taste')
+          mark = request.POST.get('mark')
+          t = Tabacco.objects.get(Taste=taste, Mark=mark)
+          f = Feedback(TabaccoMark=t, Mark=mass, RecipeMark=None).save()
 
-    def post(self, request, *args, **kwargs):
-
-        if request.path == '/add':
-          if request.POST.get('taste') and request.POST.get('mark'):
-            if request.POST.get('type') == "delete":
-              taste = request.POST.get('taste')
-              mark = request.POST.get('mark')
-              t = Tabacco.objects.get(Mark=mark, Taste=taste)
-              t.Have = False
-              t.save()
-
-            else:
-              mass = request.POST.get('mass')
-              taste = request.POST.get('taste')
-              mark = request.POST.get('mark')
-              # if mass == '' or taste == '' or mark == '':
-              #     return TemplateResponse(request, "index.html",
-              #                             context={'tabaccos': HookahIndex.tabaccos,
-              #                                      'recepies': HookahIndex.recepies,
-              #                                      'error': {'mark': mark,
-              #                                                'taste': taste,
-              #                                                'mass': mass}})
-              t = construct_tobacco({'mark': mark, 'taste': taste})
-              t.Mass = mass
-              t.Have = True
-              t.save()
-          return redirect('/add')
-        elif request.path == '/stat':
-          if request.POST.get('taste') and request.POST.get('mark'):
-            if request.POST.get('type') == "tabac":
-              mass = request.POST.get('mass')
-              taste = request.POST.get('taste')
-              mark = request.POST.get('mark')
-              t = Tabacco.objects.get(Taste=taste, Mark=mark)
-              f = Feedback(TabaccoMark=t, Mark=mass, RecipeMark=None).save()
-
-          return redirect('/stat')
+      return redirect('/stat')
 

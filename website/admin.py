@@ -16,7 +16,7 @@ class HookerAdmin(UserAdmin):
     add_form = HookerCreationForm
     form = HookerChangeForm
     model = Hooker
-    list_display = ['email', 'username','Tabaccos']
-    list_editable = ['Tabaccos']
+    list_display = ['email', 'username']
+    # list_editable = ['Tabaccos']
 
 admin.site.register(Hooker, HookerAdmin)

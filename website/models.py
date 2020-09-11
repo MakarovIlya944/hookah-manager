@@ -11,89 +11,105 @@ class Taste(models.Model):
     def __str__(self):
         return self.Taste
 
+class Hooker(AbstractUser):
+    pass
+
 class Tabacco(models.Model):
 
-    Brand = models.CharField(max_length=32, default='any')
+    Brand = models.CharField(max_length=32, default='')
     Name = models.CharField(max_length=32)
+    Keepers = models.ManyToManyField(Hooker, blank=True, related_name="Keepers")
     Icon = models.CharField(max_length=32, default='fa fa-leaf')
     Mass = models.IntegerField(default=0)
     Strength = models.IntegerField(default=5)
     Tastes = models.ManyToManyField(Taste, related_name="Tastes")
 
     def short(self):
-        return "self.Taste" + ((": " + self.Brand) if self.Brand and str(self.Brand) != "any" else "")
+        return self.Brand + ": " + self.Name
 
     def toJson(self):
+        tastes = self.Tastes.all()
+        tastes = [str(t) for t in tastes]
         return {
-            'have':self.Have, 
             'mass':self.Mass,
-            'taste':"self.Taste", 
-            'Brand':self.Brand,
+            'taste':'['+{",".join(tastes)}+']', 
+            'brand':self.Brand,
+            'name':self.Name,
+            'strength':self.Strength,
             }
 
     def __str__(self):
-        return f'Taste: self.Taste {"Brand: " + self.Brand if self.Brand and str(self.Brand) != "any" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
+        tastes = self.Tastes.all()
+        tastes = [str(t) for t in tastes]
+        return f'{"Brand: " + self.Brand + " " if self.Brand and str(self.Brand) != "any" else ""}Name: {self.Name} [{",".join(tastes)}]{" Mass: " + str(self.Mass) if self.Mass else ""}'
 
 class Recipe(models.Model):
 
     LIQUIDS = (
-        ('MILK', 'milk'),
         ('WATER', 'water'),
+        ('MILK', 'milk'),
         ('GREEN TEA', 'green tea'),
         ('ICE', 'ice'),
         ('VINE', 'vine'),
     )
 
-    TabaccoList = models.ManyToManyField(Tabacco, related_name="TabaccoList")
-    OptionalList = models.ManyToManyField(
-        Tabacco, blank=True, related_name="OptionalList")
+    Tabaccos = models.ManyToManyField(Tabacco, blank=True, related_name="RecipeTabaccos")
+    Tastes = models.ManyToManyField(Taste, blank=True, related_name="RecipeTastes")
     Flask = models.CharField(max_length=32, choices=LIQUIDS)
-    Description = models.TextField(max_length=128)
+    Description = models.TextField(max_length=128, default="")
 
-    def price(self):
-        tabaccos = Tabacco.objects.filter(Have=True).all()
-        recipe = self.TabaccoList.all()
+    def price(self, username):
+        tabaccos = Tabacco.objects.filter(Keepers__username=username)
         a = 0
-        for t in recipe:
-            if (t.Brand == 'any' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Brand=t.Brand, Taste=t.Taste)) > 0:
-                a += 1
+        if self.Tabaccos:
+            recipe = self.Tabaccos.all()
+            for t in recipe:
+                if len(tabaccos.filter(Brand=t.Brand, Taste=t.Taste)) > 0:
+                    a += 1
+        else:
+            recipe = self.Tastes.all()
+            for t in recipe:
+                if len(tabaccos.filter(Tastes__contain=t.Taste)) > 0:
+                    a += 1
         if a:
             return a / len(recipe)
         else:
             return -len(recipe)
 
     def toJson(self):
-        return {
-            'options': [o.toJson() for o in self.OptionalList.all()],
-            'tabaccos': [t.toJson() for t in self.TabaccoList.all()],
-            'flask': str(self.Flask),
-            'desc' : str(self.Description)
-        }
+      res = {
+        'flask': str(self.Flask),
+        'desc' : str(self.Description)
+      }
+      if self.Tabaccos:
+        res['tabaccos'] = [t.toJson() for t in self.Tabaccos.all()]
+      else:
+        res['tastes'] = [str(t) for t in self.Tastes.all()]
+      return res
 
     def __str__(self):
-        tabaccos = self.TabaccoList.all()
+      if len(self.Tabaccos) > 0:
+        tabaccos = self.Tabaccos.all()
         return '\n'.join([str(e) for e in tabaccos])
-
-class Hooker(AbstractUser):
-
-    Tabaccos = models.ForeignKey(Tabacco, null=True, on_delete = models.CASCADE)
-    pass
+      else:
+        tastes = self.Tastes.all()
+        return '['+','.join([str(e) for e in tastes])+']'
 
 class Feedback(models.Model):
     
     Author = models.ForeignKey(Hooker, on_delete = models.CASCADE)
-    TabaccoBrand = models.OneToOneField(
-        Tabacco,null=True, blank=True, related_name="TabaccoBrand", on_delete=models.CASCADE)
-    RecipeBrand = models.OneToOneField(
-        Recipe,null=True, blank=True, related_name="RecipeBrand", on_delete=models.CASCADE)
+    TabaccoList = models.OneToOneField(
+        Tabacco,null=True, blank=True, related_name="TabaccoList", on_delete=models.CASCADE)
+    RecipeList = models.OneToOneField(
+        Recipe,null=True, blank=True, related_name="RecipeList", on_delete=models.CASCADE)
     Mark = models.IntegerField(default=50)
     Date = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        if self.RecipeBrand:
-          return 'RecipeBrand: ' + str(self.RecipeBrand)
+        if self.RecipeList:
+          return 'RecipeList: ' + str(self.RecipeList)
         else:
-          if self.TabaccoBrand:
-            return 'TabaccoBrand: ' + str(self.TabaccoBrand)
+          if self.TabaccoList:
+            return 'TabaccoList: ' + str(self.TabaccoList)
           else:
             return 'Empty Feedback'
