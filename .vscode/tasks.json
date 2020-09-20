@@ -4,10 +4,13 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Django: run server with postgres",
+      "label": "Django-docker: run server",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","runserver"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "runserver"
+      ],
       "options": {
         "env": {
           "POSTGRES_PASSWORD": "weee",
@@ -27,12 +30,92 @@
       "label": "Django: run server",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","runserver", "8080"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "runserver",
+        "8080"
+      ],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
       }
+    },
+    {
+      "label": "Django-migrate: read all",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "tabaccos",
+        "read",
+        "-t",
+        "${workspaceFolder}/data/tastes.json"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "dependsOn": [
+        "Django-migrate: read tabaccos",
+        "Django-migrate: read recipes"
+      ],
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Django-migrate: read tastes",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "tabaccos",
+        "read",
+        "-t",
+        "${workspaceFolder}/data/tastes.json"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Django-migrate: read tabaccos",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "tabaccos",
+        "read",
+        "-b",
+        "${workspaceFolder}/data/tabaccos.json"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "dependsOrder": "sequence"
+    },
+    {
+      "label": "Django-migrate: read recipes",
+      "type": "shell",
+      "command": "${config:python.pythonPath}",
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "tabaccos",
+        "read",
+        "-r",
+        "${workspaceFolder}/data/recipes.json"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "dependsOrder": "sequence"
     },
     {
       "label": "Docker: push",
@@ -42,7 +125,9 @@
         "push",
         "mindbreez/site:0.0.3"
       ],
-      "dependsOn":["Docker: build"],
+      "dependsOn": [
+        "Docker: build"
+      ],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -69,7 +154,12 @@
       "label": "Django: run server outworld",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","runserver", "0.0.0.0:80", "--noreload"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "runserver",
+        "0.0.0.0:80",
+        "--noreload"
+      ],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -80,9 +170,14 @@
       "label": "Django: migrate",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","migrate"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "migrate"
+      ],
       "problemMatcher": [],
-      "dependsOn":["Django: migrate app"],
+      "dependsOn": [
+        "Django: migrate app"
+      ],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
@@ -92,7 +187,11 @@
       "label": "Django: migrate app",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","makemigrations", "website"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "makemigrations",
+        "website"
+      ],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -103,7 +202,10 @@
       "label": "Django: create super user",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","createsuperuser"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "createsuperuser"
+      ],
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -111,10 +213,13 @@
       }
     },
     {
-      "label": "Django: migrate with postgres",
+      "label": "Django-docker: migrate",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","migrate"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "migrate"
+      ],
       "options": {
         "env": {
           "POSTGRES_PASSWORD": "weee",
@@ -125,17 +230,23 @@
         }
       },
       "problemMatcher": [],
-      "dependsOn":["Django: migrate app"],
+      "dependsOn": [
+        "Django: migrate app"
+      ],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
       }
     },
     {
-      "label": "Django: migrate app with postgres",
+      "label": "Django-docker: migrate app",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","makemigrations", "website"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "makemigrations",
+        "website"
+      ],
       "options": {
         "env": {
           "POSTGRES_PASSWORD": "weee",
@@ -152,10 +263,13 @@
       }
     },
     {
-      "label": "Django: create super user with postgres",
+      "label": "Django-docker: create super user",
       "type": "shell",
       "command": "${config:python.pythonPath}",
-      "args": ["${workspaceFolder}/manage.py","createsuperuser"],
+      "args": [
+        "${workspaceFolder}/manage.py",
+        "createsuperuser"
+      ],
       "options": {
         "env": {
           "POSTGRES_PASSWORD": "weee",

@@ -26,7 +26,8 @@
             "args": [
                 "tabaccos",
                 "read",
-                "website\\data\\recipe.json",
+                "-t",
+                "data\\tastes.json",
             ],
             "console": "integratedTerminal"
         },

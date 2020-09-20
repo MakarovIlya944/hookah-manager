@@ -8,7 +8,6 @@ from django.db.models import Q
 
 def GetHookerRecipies(username):
   tabaccos = Tabacco.objects.filter(Keepers__username=username)
-  tabaccos = [t for t in tabaccos]
   allrecepies = Recipe.objects.all()
   recepies = []
   for r in allrecepies:
@@ -16,7 +15,7 @@ def GetHookerRecipies(username):
     if r.Tabaccos:
       for t in r.Tabaccos.all():
         rtabacs.append({'name': str(t)})
-        if (len(tabaccos.filter(Brand=t.Brand, Taste=t.Taste)) > 0):
+        if (len(tabaccos.filter(Brand=t.Brand, Name=t.Name)) > 0):
           rtabacs[-1]['have'] = 'list-group-item-primary'
         else:
           rtabacs[-1]['have'] = 'list-group-item-danger'
@@ -32,18 +31,18 @@ def GetHookerRecipies(username):
 
 def GetHookerTabaccos(username):
   tabaccos = Tabacco.objects.filter(Keepers__username=username)
-  return [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Taste), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+  return [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Tastes), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
 
 def GetSelectors():
   tabaccos = Tabacco.objects.all()
-  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Taste), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
-  marks = list(Tabacco.objects.values('Mark').distinct())
-  marks = [m["Mark"] for m in marks]
+  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Tastes), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+  marks = list(Tabacco.objects.values('Brand').distinct())
+  marks = [m["Brand"] for m in marks]
   selectorMarks = {}
   for i,m in enumerate(marks):
     selectorMarks[m] = []
     for t in tabaccos:
-      if t["mark"] == m:
+      if t["brand"] == m:
         selectorMarks[m].append(t["taste"])
   return selectorMarks
 
@@ -84,7 +83,7 @@ class HookahIndex(View):
         if request.POST.get('type') == "delete":
           taste = request.POST.get('taste')
           mark = request.POST.get('mark')
-          t = Tabacco.objects.get(Mark=mark, Taste=taste)
+          t = Tabacco.objects.get(Mark=mark, Tastes=taste)
           t.Have = False
           t.save()
 
@@ -103,7 +102,7 @@ class HookahIndex(View):
           mass = request.POST.get('mass')
           taste = request.POST.get('taste')
           mark = request.POST.get('mark')
-          t = Tabacco.objects.get(Taste=taste, Mark=mark)
+          t = Tabacco.objects.get(Tastes=taste, Mark=mark)
           f = Feedback(TabaccoMark=t, Mark=mass, RecipeMark=None).save()
 
       return redirect('/stat')
