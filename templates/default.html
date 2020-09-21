@@ -33,16 +33,14 @@
         </div>
         <div class="row justify-content-center features">
             {% for element in tabaccos %}
-            {% if element.have %}
             <div class="col-sm-6 col-md-5 col-lg-4 item">
                 <div class="box"><i class="{{ element.icon }} icon"></i>
-                    <h3 class="name">{{ element.taste }}</h3>
-                    <p class="description">{{ element.mark }}{% if element.mass %}
-                        {{ element.mass }}мг
-                        {% endif %}</p>
+                    <h3 class="name">{{ element.name }}</h3>
+                    {{ element.tastes|join:", " }}
+                    <p class="description">{{ element.brand }}
+                        {{ element.mass }}мг</p>
                 </div>
             </div>
-            {% endif %}
             {% endfor %}
         </div>
     </div>

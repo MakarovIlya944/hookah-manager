@@ -25,15 +25,16 @@ def construct_taste(data):
 
 def construct_tobacco(data):
     tastes = []
-    for t in data.get('taste'):
-        tastes.append(construct_taste(t)[0])
+    for taste in data.get('taste'):
+        tastes.append(construct_taste(taste)[0])
 
     name = data.get('name')
     brand = data.get('brand').lower()
     is_new = False
     try:
-        t = Tabacco(Name=name)
+        t = Tabacco.objects.get(Name=name)
     except Exception:
+        t = Tabacco(Name=name)
         t.save()
         is_new = True
     t.Tastes.set(tastes)
@@ -41,7 +42,7 @@ def construct_tobacco(data):
     t.Brand = brand
     t.Strength = data.get('strength')
     t.Icon = Icon(Icon=Icon.choose_icon(brand))
-
+    t.Icon.save()
     t.save()
     return t, is_new
 

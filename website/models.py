@@ -31,17 +31,28 @@ class Icon(models.Model):
 
   Icon = models.CharField(max_length=32, choices=ICONS, default=DEFAULT, primary_key=True)
 
-  def choose_icon(self, brand):
+  def choose_icon(brand):
     if brand == 'darkside':
-      return self.ROCKET
+      return Icon.ROCKET
     elif brand == 'sebero':
-      return self.ANIMAL
+      return Icon.ANIMAL
     elif brand == 'element':
-      return self.ELEMENT
+      return Icon.ELEMENT
     elif brand == 'dailyhookah':
-      return self.SUPPORT
+      return Icon.SUPPORT
     else:
-      return self.DEFAULT
+      return Icon.DEFAULT
+  
+  def icon(self):
+    t = self.ICONS[0][1]
+    for i in self.ICONS:
+      if self.Icon == i[0]:
+        t = i[1]
+        break
+    return t
+
+  def __str__(self):
+    return self.Icon + ": " + self.icon()
 
 class Tabacco(models.Model):
 
@@ -55,6 +66,8 @@ class Tabacco(models.Model):
 
   def short(self):
     return self.Brand + ": " + self.Name
+  short.admin_order_field = 'brand_name'
+  brand_name = property(short)
 
   def toJson(self):
     tastes = self.Tastes.all()
@@ -68,9 +81,8 @@ class Tabacco(models.Model):
           }
 
   def __str__(self):
-    tastes = self.Tastes.all()
-    tastes = [str(t) for t in tastes]
-    return f'{"Brand: " + self.Brand + " " if self.Brand and str(self.Brand) != "any" else ""}Name: {self.Name} [{",".join(tastes)}]{" Mass: " + str(self.Mass) if self.Mass else ""}'
+    tastes = [str(t) for t in self.Tastes.all()]
+    return f'{self.Brand}: {self.Name} [{",".join(tastes)}]{" Mass: " + str(self.Mass) if self.Mass else ""}'
 
 class Recipe(models.Model):
     WATER = 'WATER'

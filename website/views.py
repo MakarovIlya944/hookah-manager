@@ -12,7 +12,7 @@ def GetHookerRecipies(username):
   recepies = []
   for r in allrecepies:
     rtabacs = []
-    if r.Tabaccos:
+    if len(r.Tabaccos.all()) > 0:
       for t in r.Tabaccos.all():
         rtabacs.append({'name': str(t)})
         if (len(tabaccos.filter(Brand=t.Brand, Name=t.Name)) > 0):
@@ -20,22 +20,23 @@ def GetHookerRecipies(username):
         else:
           rtabacs[-1]['have'] = 'list-group-item-danger'
     else:
-      rtabacs.append({'taste': str(t)})
-      if (len(tabaccos.filter(Taste__Taste=t.Taste)) > 0):
-        rtabacs[-1]['have'] = 'list-group-item-primary'
-      else:
-        rtabacs[-1]['have'] = 'list-group-item-danger'
+      for t in r.Tastes.all():
+        rtabacs.append({'taste': str(t)})
+        if (len(tabaccos.filter(Tastes__Taste=t.Taste)) > 0):
+          rtabacs[-1]['have'] = 'list-group-item-primary'
+        else:
+          rtabacs[-1]['have'] = 'list-group-item-danger'
     recepies.append({'tabaccos': rtabacs, 'value':r.price(username)})
 
   return sorted(recepies, key=lambda x: -x['value'])
 
 def GetHookerTabaccos(username):
   tabaccos = Tabacco.objects.filter(Keepers__username=username)
-  return [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Tastes), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+  return [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.icon(), 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
 
 def GetSelectors():
   tabaccos = Tabacco.objects.all()
-  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'taste': str(t.Tastes), 'icon': t.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
   marks = list(Tabacco.objects.values('Brand').distinct())
   marks = [m["Brand"] for m in marks]
   selectorMarks = {}
@@ -43,7 +44,7 @@ def GetSelectors():
     selectorMarks[m] = []
     for t in tabaccos:
       if t["brand"] == m:
-        selectorMarks[m].append(t["taste"])
+        selectorMarks[m].append(t["name"])
   return selectorMarks
 
 def GetTabaccosStat():
@@ -106,4 +107,3 @@ class HookahIndex(View):
           f = Feedback(TabaccoMark=t, Mark=mass, RecipeMark=None).save()
 
       return redirect('/stat')
-

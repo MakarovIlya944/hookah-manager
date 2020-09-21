@@ -26,8 +26,8 @@
             "args": [
                 "tabaccos",
                 "read",
-                "-t",
-                "data\\tastes.json",
+                "-b",
+                "data\\tabaccos.json",
             ],
             "console": "integratedTerminal"
         },
