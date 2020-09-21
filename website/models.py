@@ -101,12 +101,12 @@ class Recipe(models.Model):
     Tabaccos = models.ManyToManyField(Tabacco, blank=True, related_name="RecipeTabaccos")
     Tastes = models.ManyToManyField(Taste, blank=True, related_name="RecipeTastes")
     Flask = models.CharField(max_length=32, choices=LIQUIDS, default=WATER)
-    Description = models.TextField(max_length=128, default="")
+    Description = models.TextField(max_length=128, null=True, blank=True, default="")
 
     def price(self, username):
         tabaccos = Tabacco.objects.filter(Keepers__username=username)
         a = 0
-        if self.Tabaccos:
+        if len(self.Tabaccos.all()) > 0:
             recipe = self.Tabaccos.all()
             for t in recipe:
                 if len(tabaccos.filter(Brand=t.Brand, Name=t.Name)) > 0:
@@ -114,7 +114,7 @@ class Recipe(models.Model):
         else:
             recipe = self.Tastes.all()
             for t in recipe:
-                if len(tabaccos.filter(Tastes__contain=t.Taste)) > 0:
+                if len(tabaccos.filter(Tastes__Taste=t.Taste)) > 0:
                     a += 1
         if a:
             return a / len(recipe)
@@ -126,7 +126,7 @@ class Recipe(models.Model):
         'flask': str(self.Flask),
         'desc' : str(self.Description)
       }
-      if self.Tabaccos:
+      if len(self.Tabaccos.all()) > 0:
         res['tabaccos'] = [t.toJson() for t in self.Tabaccos.all()]
       else:
         res['tastes'] = [str(t) for t in self.Tastes.all()]
@@ -142,7 +142,7 @@ class Recipe(models.Model):
 
 class Feedback(models.Model):
     
-    Author = models.ForeignKey(Hooker, on_delete = models.CASCADE)
+    Author = models.ForeignKey(Hooker, on_delete=models.DO_NOTHING)
     TabaccoList = models.OneToOneField(
         Tabacco,null=True, blank=True, related_name="TabaccoList", on_delete=models.CASCADE)
     RecipeList = models.OneToOneField(

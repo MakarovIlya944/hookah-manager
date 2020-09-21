@@ -18,18 +18,19 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Вкус</th>
                     <th>Марка</th>
+                    <th>Название</th>
+                    <th>Крепость</th>
                     <th>Масса</th>
                     <th>Действия</th>
                 </tr>
             </thead>
             <tbody>
-                {% for tabac in tabaccos|dictsort:"taste" %}
-                {% if tabac.have %}
+                {% for tabac in tabaccos|dictsort:"name" %}
                 <tr>
-                    <td>{{ tabac.taste }}</td>
-                    <td>{{ tabac.mark }}</td>
+                    <td>{{ tabac.brand }}</td>
+                    <td>{{ tabac.name }}</td>
+                    <td>{{ tabac.strength }}</td>
                     <td>{{ tabac.mass }}</td>
                     <td>
                         <form method="POST">
@@ -52,7 +53,6 @@
                         </form>
                     </td>
                 </tr>
-                {% endif %}
                 {% endfor %}
             </tbody>
         </table>

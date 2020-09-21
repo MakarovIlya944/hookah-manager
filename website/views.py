@@ -48,7 +48,7 @@ def GetSelectors():
   return selectorMarks
 
 def GetTabaccosStat():
-  temp = Feedback.objects.all().exclude(TabaccoBrand=None)
+  temp = Feedback.objects.all().exclude(TabaccoList=None)
   feedbacks = []
   for f in temp:
     for el in feedbacks:
@@ -82,17 +82,19 @@ class HookahIndex(View):
     if request.path == '/add':
       if request.POST.get('taste') and request.POST.get('mark'):
         if request.POST.get('type') == "delete":
-          taste = request.POST.get('taste')
-          mark = request.POST.get('mark')
-          t = Tabacco.objects.get(Mark=mark, Tastes=taste)
-          t.Have = False
+          name = request.POST.get('taste')
+          brand = request.POST.get('mark')
+          t = Tabacco.objects.get(Brand=brand, Name=name)
+          t.save()
+          h = Hooker.objects.get(username=request.user.username)
+          t.Keepers.add(h)
           t.save()
 
         else:
           mass = request.POST.get('mass')
           taste = request.POST.get('taste')
           mark = request.POST.get('mark')
-          t = construct_tobacco({'mark': mark, 'taste': taste})
+          t, j = construct_tobacco({'mark': mark, 'taste': taste})
           t.Mass = mass
           t.Have = True
           t.save()
@@ -100,10 +102,14 @@ class HookahIndex(View):
     elif request.path == '/stat':
       if request.POST.get('taste') and request.POST.get('mark'):
         if request.POST.get('type') == "tabac":
-          mass = request.POST.get('mass')
-          taste = request.POST.get('taste')
-          mark = request.POST.get('mark')
-          t = Tabacco.objects.get(Tastes=taste, Mark=mark)
-          f = Feedback(TabaccoMark=t, Mark=mass, RecipeMark=None).save()
+          mark = request.POST.get('mass')
+          name = request.POST.get('taste')
+          brand = request.POST.get('mark')
+          t = Tabacco.objects.get(Brand=brand, Name=name)
+          h = Hooker.objects.get(username=request.user.username)
+          f = Feedback(Mark=mark, RecipeList=None, Author=h)
+          f.save()
+          f.TabaccoList.add(t)
+          f.save()
 
       return redirect('/stat')
