@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'website',
 ]
 
+AUTH_USER_MODEL = 'website.Hooker'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -81,6 +83,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins': [
+                'website.templatetags.math',
+            ]
         },
     },
 ]

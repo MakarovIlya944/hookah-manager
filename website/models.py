@@ -3,82 +3,158 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
+
+class Taste(models.Model):
+
+    Taste = models.CharField(max_length=32)
+    def __str__(self):
+        return self.Taste
+
+class Hooker(AbstractUser):
+    pass
+
+class Icon(models.Model):
+  DEFAULT = 'DEFAULT'
+  ROCKET = 'ROCKET'
+  ANIMAL = 'ANIMAL'
+  ELEMENT = 'ELEMENT'
+  SUPPORT = 'SUPPORT'
+  
+  ICONS = (
+    (DEFAULT, 'fa fa-leaf'),
+    (ROCKET, 'fas fa-space-shuttle'),
+    (ANIMAL, 'fas fa-paw'),
+    (ELEMENT, 'fab fa-elementor'),
+    (SUPPORT, 'icon-support'),
+  )
+
+  Icon = models.CharField(max_length=32, choices=ICONS, default=DEFAULT, primary_key=True)
+
+  def choose_icon(brand):
+    if brand == 'darkside':
+      return Icon.ROCKET
+    elif brand == 'sebero':
+      return Icon.ANIMAL
+    elif brand == 'element':
+      return Icon.ELEMENT
+    elif brand == 'dailyhookah':
+      return Icon.SUPPORT
+    else:
+      return Icon.DEFAULT
+  
+  def icon(self):
+    t = self.ICONS[0][1]
+    for i in self.ICONS:
+      if self.Icon == i[0]:
+        t = i[1]
+        break
+    return t
+
+  def __str__(self):
+    return self.Icon + ": " + self.icon()
 
 class Tabacco(models.Model):
 
-    Mark = models.CharField(max_length=32, default='any')
-    Taste = models.CharField(max_length=32)
-    Icon = models.CharField(max_length=32, default='fa fa-leaf')
-    Mass = models.IntegerField(default=0)
-    Have = models.BooleanField(default=False)
+  Brand = models.CharField(max_length=32, default='')
+  Name = models.CharField(max_length=32)
+  Keepers = models.ManyToManyField(Hooker, blank=True, related_name="Keepers")
+  Icon = models.ForeignKey(Icon, null=True, blank=True, related_name="TabaccoIcon", on_delete = models.SET_NULL)
+  Mass = models.IntegerField(default=0)
+  Tastes = models.ManyToManyField(Taste, related_name="TabaccoTastes")
+  Strength = models.IntegerField(default=5)
 
-    def short(self):
-        return self.Taste + ((": " + self.Mark) if self.Mark and str(self.Mark) != "any" else "")
+  def short(self):
+    return self.Brand + ": " + self.Name
+  short.admin_order_field = 'brand_name'
+  brand_name = property(short)
 
-    def toJson(self):
-        return {
-            'have':self.Have, 
-            'mass':self.Mass,
-            'taste':self.Taste, 
-            'mark':self.Mark,
-            }
+  def toJson(self):
+    tastes = self.Tastes.all()
+    tastes = [str(t) for t in tastes]
+    return {
+          'mass':self.Mass,
+          'taste':tastes,
+          'brand':self.Brand,
+          'name':self.Name,
+          'strength':self.Strength,
+          }
 
-    def __str__(self):
-        return f'Taste: {self.Taste} {"Mark: " + self.Mark if self.Mark and str(self.Mark) != "any" else ""} {"Mass: " + str(self.Mass) if self.Mass else ""}'
+  def __str__(self):
+    tastes = [str(t) for t in self.Tastes.all()]
+    return f'{self.Brand}: {self.Name} [{",".join(tastes)}]{" Mass: " + str(self.Mass) if self.Mass else ""}'
 
 class Recipe(models.Model):
-
+    WATER = 'WATER'
+    MILK = 'MILK'
+    GREENTEA = 'GREENTEA'
+    ICE = 'ICE'
+    VINE = 'VINE'
     LIQUIDS = (
-        ('MILK', 'milk'),
-        ('WATER', 'water'),
-        ('GREEN TEA', 'green tea'),
-        ('ICE', 'ice'),
-        ('VINE', 'vine'),
+        (WATER, 'water'),
+        (MILK, 'milk'),
+        (GREENTEA, 'green tea'),
+        (ICE, 'ice'),
+        (VINE, 'vine'),
     )
 
-    TabaccoList = models.ManyToManyField(Tabacco, related_name="TabaccoList")
-    OptionalList = models.ManyToManyField(
-        Tabacco, blank=True, related_name="OptionalList")
-    Flask = models.CharField(max_length=32, choices=LIQUIDS)
-    Description = models.TextField(max_length=128)
+    Tabaccos = models.ManyToManyField(Tabacco, blank=True, related_name="RecipeTabaccos")
+    Tastes = models.ManyToManyField(Taste, blank=True, related_name="RecipeTastes")
+    Flask = models.CharField(max_length=32, choices=LIQUIDS, default=WATER)
+    Description = models.TextField(max_length=128, null=True, blank=True, default="")
 
-    def price(self):
-        tabaccos = Tabacco.objects.filter(Have=True).all()
-        recipe = self.TabaccoList.all()
+    def price(self, username):
+        tabaccos = Tabacco.objects.filter(Keepers__username=username)
         a = 0
-        for t in recipe:
-            if (t.Mark == 'any' and len(tabaccos.filter(Taste=t.Taste)) > 0) or len(tabaccos.filter(Mark=t.Mark, Taste=t.Taste)) > 0:
-                a += 1
+        if len(self.Tabaccos.all()) > 0:
+            recipe = self.Tabaccos.all()
+            for t in recipe:
+                if len(tabaccos.filter(Brand=t.Brand, Name=t.Name)) > 0:
+                    a += 1
+        else:
+            recipe = self.Tastes.all()
+            for t in recipe:
+                if len(tabaccos.filter(Tastes__Taste=t.Taste)) > 0:
+                    a += 1
         if a:
             return a / len(recipe)
         else:
             return -len(recipe)
+
     def toJson(self):
-        return {
-            'options': [o.toJson() for o in self.OptionalList.all()],
-            'tabaccos': [t.toJson() for t in self.TabaccoList.all()],
-            'flask': str(self.Flask),
-            'desc' : str(self.Description)
-        }
+      res = {
+        'flask': str(self.Flask),
+        'desc' : str(self.Description)
+      }
+      if len(self.Tabaccos.all()) > 0:
+        res['tabaccos'] = [t.toJson() for t in self.Tabaccos.all()]
+      else:
+        res['tastes'] = [str(t) for t in self.Tastes.all()]
+      return res
 
     def __str__(self):
-        tabaccos = self.TabaccoList.all()
+      if len(self.Tabaccos.all()) > 0:
+        tabaccos = self.Tabaccos.all()
         return '\n'.join([str(e) for e in tabaccos])
+      else:
+        tastes = self.Tastes.all()
+        return '['+','.join([str(e) for e in tastes])+']'
 
 class Feedback(models.Model):
     
-    TabaccoMark = models.OneToOneField(
-        Tabacco,null=True, blank=True, related_name="TabaccoMark", on_delete=models.CASCADE)
-    RecipeMark = models.OneToOneField(
-        Recipe,null=True, blank=True, related_name="RecipeMark", on_delete=models.CASCADE)
+    Author = models.ForeignKey(Hooker, on_delete=models.DO_NOTHING)
+    TabaccoList = models.OneToOneField(
+        Tabacco,null=True, blank=True, related_name="TabaccoList", on_delete=models.CASCADE)
+    RecipeList = models.OneToOneField(
+        Recipe,null=True, blank=True, related_name="RecipeList", on_delete=models.CASCADE)
     Mark = models.IntegerField(default=50)
     Date = models.DateField(auto_now_add=True)
-    
+
     def __str__(self):
-        if self.RecipeMark:
-          return 'RecipeMark: ' + str(self.RecipeMark)
+        if self.RecipeList:
+          return 'RecipeList: ' + str(self.RecipeList)
         else:
-          if self.TabaccoMark:
-            return 'TabaccoMark: ' + str(self.TabaccoMark)
+          if self.TabaccoList:
+            return 'TabaccoList: ' + str(self.TabaccoList)
           else:
             return 'Empty Feedback'

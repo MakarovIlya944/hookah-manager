@@ -1,0 +1,274 @@
+[
+  {
+    "mass": 20,
+    "taste": [
+      "пряный чай"
+    ],
+    "brand": "sebero",
+    "name": "Спайси-чай",
+    "strength": 5
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "томат"
+    ],
+    "brand": "sebero",
+    "name": "Томат",
+    "strength": 5
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "огурец базилик"
+    ],
+    "brand": "sebero",
+    "name": "Огурец–базилик",
+    "strength": 5
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "ром",
+      "цветы"
+    ],
+    "brand": "dailyhookah",
+    "name": "свободная куба",
+    "strength": 4
+  },
+  {
+    "mass": 80,
+    "taste": [
+      "барбарис",
+      "жвачка"
+    ],
+    "brand": "darkside",
+    "name": "BARBERRY GUM",
+    "strength": 8
+  },
+  {
+    "mass": 40,
+    "taste": [
+      "орех",
+      "пирог"
+    ],
+    "brand": "cobra",
+    "name": "Devil's Nut Cake",
+    "strength": 5
+  },
+  {
+    "mass": 45,
+    "taste": [
+      "фрукты"
+    ],
+    "brand": "dgactra",
+    "name": "тропический микс",
+    "strength": 4
+  },
+  {
+    "mass": 100,
+    "taste": [
+      "вишня",
+      "кислый"
+    ],
+    "brand": "burn",
+    "name": "Black Cherry Shock",
+    "strength": 7
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "шоколад",
+      "мороженное"
+    ],
+    "brand": "dgactra",
+    "name": "шоколадное мороженное",
+    "strength": 4
+  },
+  {
+    "mass": 50,
+    "taste": [
+      "холод"
+    ],
+    "brand": "darkside",
+    "name": "supernova",
+    "strength": 8
+  },
+  {
+    "mass": 30,
+    "taste": [
+      "энергетик"
+    ],
+    "brand": "spectrum",
+    "name": "энергетик",
+    "strength": 5
+  },
+  {
+    "mass": 100,
+    "taste": [
+      "манго"
+    ],
+    "brand": "must have",
+    "name": "mango slim",
+    "strength": 6
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "пихта",
+      "холод"
+    ],
+    "brand": "darkside",
+    "name": "алтайский трип",
+    "strength": 8
+  },
+  {
+    "mass": 50,
+    "taste": [
+      "мед",
+      "фрукты"
+    ],
+    "brand": "matpeam",
+    "name": "tropic honey",
+    "strength": 6
+  },
+  {
+    "mass": 30,
+    "taste": [
+      "личи"
+    ],
+    "brand": "space smoke",
+    "name": "lycche king",
+    "strength": 0
+  },
+  {
+    "mass": 30,
+    "taste": [
+      "клюква"
+    ],
+    "brand": "space smoke",
+    "name": "cranberry strike",
+    "strength": 0
+  },
+  {
+    "mass": 30,
+    "taste": [],
+    "brand": "space smoke",
+    "name": "jack pirate",
+    "strength": 0
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "малина"
+    ],
+    "brand": "spectrum",
+    "name": "Russian Raspberry",
+    "strength": 5
+  },
+  {
+    "mass": 30,
+    "taste": [
+      "мята",
+      "фисташка"
+    ],
+    "brand": "darkside",
+    "name": "Байкальский краш",
+    "strength": 8
+  },
+  {
+    "mass": 40,
+    "taste": [
+      "банан"
+    ],
+    "brand": "element",
+    "name": "bananerro",
+    "strength": 2
+  },
+  {
+    "mass": 40,
+    "taste": [
+      "байкал"
+    ],
+    "brand": "element",
+    "name": "baikal",
+    "strength": 2
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "кокос"
+    ],
+    "brand": "must have",
+    "name": "coconut shake",
+    "strength": 6
+  },
+  {
+    "mass": 30,
+    "taste": [
+      "лемонграс",
+      "фейхоа",
+      "эвкалипта"
+    ],
+    "brand": "darkside",
+    "name": "Таежный трип",
+    "strength": 8
+  },
+  {
+    "mass": 50,
+    "taste": [
+      "лесные ягоды"
+    ],
+    "brand": "baccar",
+    "name": "forest berries",
+    "strength": 6
+  },
+  {
+    "mass": 15,
+    "taste": [
+      "грейпфрут"
+    ],
+    "brand": "cobra",
+    "name": "Grapefruit",
+    "strength": 7
+  },
+  {
+    "mass": 20,
+    "taste": [
+      "малина"
+    ],
+    "brand": "element",
+    "name": "малина",
+    "strength": 7
+  },
+  {
+    "mass": 10,
+    "taste": [
+      "мята",
+      "фисташка",
+      "мороженное"
+    ],
+    "brand": "darkside",
+    "name": "POLAR CREAM",
+    "strength": 8
+  },
+  {
+    "mass": 40,
+    "taste": [
+      "кислый",
+      "лайм"
+    ],
+    "brand": "matpeam",
+    "name": "la la lime",
+    "strength": 6
+  },
+  {
+    "mass": 40,
+    "taste": [
+      "мята"
+    ],
+    "brand": "spectrum",
+    "name": "ice fruit gum",
+    "strength": 7
+  }
+]
