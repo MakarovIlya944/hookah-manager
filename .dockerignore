@@ -1,5 +1,6 @@
 db.sqlite3
 venv/**
+data/**
 .vscode/**
 .git/**
 website/static/src/node_modules/**

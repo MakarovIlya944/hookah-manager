@@ -139,6 +139,7 @@ class Command(BaseCommand):
         elif options["mode"][0] == "write":
             write(options["file"][0], [r.toJson() for r in Recipe.objects.all()])
             write(options["file"][1], [r.toJson() for r in Tabacco.objects.all()])
+            write(options["file"][2], [r.Taste for r in Taste.objects.all()])
         elif options["mode"][0] == "migrate":
             if options["taste"]:
                 data = read(options["file"][0])

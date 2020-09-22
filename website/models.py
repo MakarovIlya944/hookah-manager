@@ -74,7 +74,7 @@ class Tabacco(models.Model):
     tastes = [str(t) for t in tastes]
     return {
           'mass':self.Mass,
-          'taste':'['+{",".join(tastes)}+']', 
+          'taste':tastes,
           'brand':self.Brand,
           'name':self.Name,
           'strength':self.Strength,

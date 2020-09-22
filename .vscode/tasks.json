@@ -123,7 +123,7 @@
       "command": "docker",
       "args": [
         "push",
-        "mindbreez/site:0.0.3"
+        "mindbreez/site:0.1.2"
       ],
       "dependsOn": [
         "Docker: build"
@@ -141,7 +141,7 @@
       "args": [
         "build",
         "-t",
-        "mindbreez/site:0.0.3",
+        "mindbreez/site:0.1.2",
         "."
       ],
       "problemMatcher": [],

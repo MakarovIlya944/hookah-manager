@@ -1,7 +1,7 @@
 version: "3.4"
 services:
   site:
-    image: mindbreez/site:0.1.0
+    image: mindbreez/site:0.1.2
     # build:
     #   context: .
     container_name: site
@@ -18,18 +18,18 @@ services:
       POSTGRES_PORT: "5432"
       SENTRY_SDK: "https://e9a0d61a572543f9ba73e6c509b9343b@o336706.ingest.sentry.io/5409851"
     volumes:
-      - ./website/data:/data
-  #   depends_on:
-  #     - database
+      - ./data:/app/data
+    depends_on:
+      - database
 
-  # database:
-  #   image: postgres:11
-  #   volumes:
-  #     - db_data:/var/lib/postgresql/data:Z
-  #   environment:
-  #     POSTGRES_PASSWORD: weee
-  #     POSTGRES_DB: site
-  #     POSTGRES_USER: master
+  database:
+    image: postgres:11
+    volumes:
+      - db_data:/var/lib/postgresql/data:Z
+    environment:
+      POSTGRES_PASSWORD: weee
+      POSTGRES_DB: site
+      POSTGRES_USER: master
 
 volumes:
   db_data:
