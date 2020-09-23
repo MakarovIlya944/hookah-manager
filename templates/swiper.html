@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block base_content %}
+
+<div class="swiper-container-vertical">
+    <div class="swiper-wrapper-vertical">
+        <!-- <div class="swiper-slide" style="background-image:url(https://placeholdit.imgix.net/~text?txtsize=68&amp;txt=Slideshow+Image&amp;w=1920&amp;h=500);">gbf</div> -->
+
+        {% for element in recepies %}
+        <div class="swiper-slide-vertical">
+
+            <ul class="list-group">
+                {% for tabac in element.tabaccos %}
+                <li class="list-group-item {{ tabac.have }}"><span>{{ tabac.taste }}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="swiper-pagination-vertical"></div>
+    <!-- <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div> -->
+</div>
+
+{% endblock base_content %}

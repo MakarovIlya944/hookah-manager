@@ -1,9 +1,4 @@
-{% extends "base.html" %}
-{% block base_content %}
-{% if user.is_authenticated %}
-
-{% include "navbar.html" %}
-{% block content %}
+{% extends "base.html" %} {% block base_content %} {% if user.is_authenticated %} {% include "navbar.html" %} {% block content %}
 <div class="simple-slider" style="background-color:rgb(255, 255, 255);">
     <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -37,10 +32,9 @@
                 <div class="box"><i class="{{ element.icon }} icon"></i>
                     <h3 class="name">{{ element.name }}</h3>
                     {{ element.tastes|join:", " }}
-                    <p class="description">{{ element.brand }}
-                        {{ element.mass }}мг
-                    <b><p>Крепость: {{ element.strength }}</p></b>
-                    <!-- <div class="progress my-75">
+                    <p class="description">{{ element.brand }} {{ element.mass }}мг
+                        <b><p>Крепость: {{ element.strength }}</p></b>
+                        <!-- <div class="progress my-75">
                         <div class="progress-bar progress-bar-striped" role="progressbar"
                             aria-valuenow="{{ element.strength|mult:"10" }}"
                             style="width:{{ element.strength|mult:"10" }}%" aria-valuemin="1" aria-valuemax="100">
@@ -54,9 +48,7 @@
         </div>
     </div>
 </div>
-{% endblock content %}
-
-{% else %}
+{% endblock content %} {% else %}
 
 <div class="highlight-blue">
     <div class="container">
@@ -68,5 +60,4 @@
     </div>
 </div>
 
-{% endif %}
-{% endblock base_content %}
+{% endif %} {% endblock base_content %}

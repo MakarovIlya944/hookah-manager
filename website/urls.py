@@ -8,5 +8,6 @@ urlpatterns = [
     path('add', HookahIndex.as_view(template='add')),
     path('stat', HookahIndex.as_view(template='statistic')),
     path('test', HookahIndex.as_view(template='test')),
+    path('swiper', HookahIndex.as_view(template='swiper')),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

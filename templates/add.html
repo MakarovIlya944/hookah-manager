@@ -1,5 +1,8 @@
-{% extends "default.html" %}
-{% block content %}
+{% extends "default.html" %} {% block content %}
+
+<div class="container" style="margin-top: 30px;width: 300px;height: 200px;">
+    <iframe data-src="swiper" src="swiper" style="min-width: 100%;" scrolling="no" frameborder="1"></iframe>
+</div>
 
 <div class="container" style="margin-top: 30px;filter: blur(0px);">
     <form method="POST">
@@ -7,8 +10,7 @@
         <div class="form-group">
             {% include "select/select-add.html" %}
         </div>
-        <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center"
-            type="submit">Добавить<br></button>
+        <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center" type="submit">Добавить<br></button>
     </form>
 </div>
 
