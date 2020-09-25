@@ -1,8 +1,4 @@
-{% extends "default.html" %} {% block content %}
-
-<div class="container" style="margin-top: 30px;width: 300px;height: 200px;">
-    <iframe data-src="swiper" src="swiper" style="min-width: 100%;" scrolling="no" frameborder="1"></iframe>
-</div>
+{% extends "default.html" %} {% block content %} {% include "swiper.html" %}
 
 <div class="container" style="margin-top: 30px;filter: blur(0px);">
     <form method="POST">

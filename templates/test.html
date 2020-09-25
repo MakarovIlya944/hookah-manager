@@ -1,28 +1,19 @@
-{% extends "base.html" %} {% block base_content %}
-<div class="container" style="width: 800px;height: 100px;">
-    <div class="simple-slider" style="background-color:rgb(255, 255, 255);">
-        <div class="swiper-container-v">
-            <div class="swiper-wrapper">
-                <!-- <div class="swiper-slide" style="background-image:url(https://placeholdit.imgix.net/~text?txtsize=68&amp;txt=Slideshow+Image&amp;w=1920&amp;h=500);">gbf</div> -->
+{% extends "default.html" %} {% block content %}
 
-                {% for element in recepies %}
-                <div class="swiper-slide" style="padding: 100px;">
-
-                    <ul class="list-group">
-                        {% for tabac in element.tabaccos %}
-                        <li class="list-group-item {{ tabac.have }}"><span>{{ tabac.taste }}</span></li>
-                        {% endfor %}
-                    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="background-color:grey;"></div>
+        <div class="col-md-2 simple-slider-vertical">
+            <div class="swiper-container swiper-container-vertical" width="100%" style="height: 100px;">
+                <div class="swiper-wrapper-vertical">
+                    <div class="swiper-slide-vertical" style="background-color:blue;"></div>
+                    <div class="swiper-slide-vertical" style="background-color:red;"></div>
+                    <div class="swiper-slide-vertical" style="background-color:green;"></div>
                 </div>
-                {% endfor %}
-
             </div>
-            <!-- <div class="swiper-pagination"></div> -->
-            <!-- <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div> -->
         </div>
+        <div class="col-md-4" style="background-color:grey;"></div>
     </div>
 </div>
-<div class="container" style="width: 800px;height: 100px;background-color:blue">
-</div>
-{% endblock base_content %}
+
+{% endblock content %}
