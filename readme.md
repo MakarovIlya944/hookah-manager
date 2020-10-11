@@ -1,12 +1,29 @@
-# Django init
+# Hookah manager
+Incredable site for hookah's tabacco managment. 
 
-## Windows
+# Features
+- Keep big base of tabaccos and recipes for hookah
+- Role-based user access
+- Tabaccos and recipes feedbacks
 
-- Create folder
-- Select python
+# Start
+
+## Simple
+
+1. Install requirements
 
 ```bat
 pip install -r requirements
+```
+
+2. Add tabaccos, recipes
+
+```bat
+python manage.py tabaccos ...
+```
+
+
+```
 python manage.py makemigrations <app>
 python manage.py migrate
 python tobacco <path> <file> 
