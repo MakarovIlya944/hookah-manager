@@ -4,6 +4,25 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Webpack: build",
+      "type": "shell",
+      "command": "npx webpack --mode none",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      },
+      "windows":{
+        "options": {
+          "cwd": "${workspaceFolder}/resources"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
       "label": "Django-docker: run server",
       "type": "shell",
       "command": "${config:python.pythonPath}",
@@ -17,14 +36,14 @@
           "POSTGRES_DB": "site",
           "POSTGRES_USER": "master",
           "POSTGRES_HOST": "host.docker.internal",
-          "POSTGRES_PORT": "5432",
+          "POSTGRES_PORT": "5432"
         }
       },
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
-      },
+      }
     },
     {
       "label": "Django: run server",
@@ -39,7 +58,8 @@
       "presentation": {
         "reveal": "always",
         "panel": "dedicated"
-      }
+      },
+      "dependsOn":["Webpack: build"]
     },
     {
       "label": "Django-migrate: read all",
@@ -226,7 +246,7 @@
           "POSTGRES_DB": "site",
           "POSTGRES_USER": "master",
           "POSTGRES_HOST": "host.docker.internal",
-          "POSTGRES_PORT": "5432",
+          "POSTGRES_PORT": "5432"
         }
       },
       "problemMatcher": [],
@@ -253,7 +273,7 @@
           "POSTGRES_DB": "site",
           "POSTGRES_USER": "master",
           "POSTGRES_HOST": "host.docker.internal",
-          "POSTGRES_PORT": "5432",
+          "POSTGRES_PORT": "5432"
         }
       },
       "problemMatcher": [],
@@ -276,7 +296,7 @@
           "POSTGRES_DB": "site",
           "POSTGRES_USER": "master",
           "POSTGRES_HOST": "host.docker.internal",
-          "POSTGRES_PORT": "5432",
+          "POSTGRES_PORT": "5432"
         }
       },
       "problemMatcher": [],

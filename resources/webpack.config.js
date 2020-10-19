@@ -4,6 +4,15 @@ module.exports = {
     entry: './js/index.js',
     output: {
         path: path.resolve(__dirname, 'result'),
-        filename: 'bundle.js'
-    }
+        filename: '../../website/static/assets/js/script.min.js'
+    },
+    module: {
+        rules: [{
+            test: /\.css$/i,
+            loader: 'css-loader',
+            options: {
+                modules: true,
+            },
+        }, ],
+    },
 };

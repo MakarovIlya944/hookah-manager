@@ -1,4 +1,7 @@
-import initSlider from './slider';
-import { changeStatButton, changeTaste, changeMark, changeMass } from './selector';
+import css from '../css/Simple-Slider.css';
+require('./slider.js');
+require('./selector.js');
 
-initSlider();
+document.getElementById('mass').onchange(changeMass('mass'));
+document.getElementById('mass-range').onchange(changeMass('mass-range'));
+document.getElementById('mass-range').onmousemove(changeMass('mass-range'));

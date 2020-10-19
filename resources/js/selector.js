@@ -31,7 +31,7 @@ export function changeTaste(isButton, current) {
 }
 
 // включает разделы с маркой, которая needOff(markName) -> false
-function processMarks(needOff) {
+export function processMarks(needOff) {
     const marks = document.getElementsByName("mark-dropdown");
     for (let i = 0; i < marks.length; i++) {
         var className = marks[i].className;
@@ -49,7 +49,7 @@ function processMarks(needOff) {
     }
 }
 
-function processTastes(markName, from, to) {
+export function processTastes(markName, from, to) {
     var tastes = document.getElementsByName("taste-dropdown-" + markName);
     var tasteSups = document.getElementsByName("taste-dropdown-sup-" + markName);
     var className;
