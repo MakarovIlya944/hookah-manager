@@ -4,9 +4,7 @@
             табака</button>
         <div role="menu" class="dropdown-menu">
             {% for key in selectors %}
-            <button type="button" role="presentation" class="dropdown-item d-inline" name="mark-dropdown"
-                onclick="changeMark(true, this)">{{ key }}</button>
-            {% endfor %}
+            <button type="button" role="presentation" class="dropdown-item d-inline" name="mark-dropdown">{{ key }}</button> {% endfor %}
         </div>
     </div>
     <div class="input-group-prepend">

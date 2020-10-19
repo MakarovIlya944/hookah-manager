@@ -1,5 +1,5 @@
 $(function() {
-    new Swiper(".swiper-container", {
+    var mainSwiper = new Swiper(".swiper-container", {
         loop: !0,
         paginationClickable: !0,
         nextButton: ".swiper-button-next",
@@ -24,12 +24,12 @@ $(function() {
         },
     });
 
-    function onChangeSlide() {
-        console.log('slide changed');
-    }
 
-    brandSwiper.on('slideChangeTransitionEnd', onChangeSlide);
-    new Swiper(".swiper-container-taste", {
+    var s = brandSwiper.on;
+    s('slideChange', () => {
+        console.log('slide changed');
+    });
+    var tasteSwiper = new Swiper(".swiper-container-taste", {
         loop: true,
         paginationClickable: true,
         speed: 600,
