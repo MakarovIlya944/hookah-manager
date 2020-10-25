@@ -1,6 +1,7 @@
 // import css from '../css/Simple-Slider.css';
 const slider = require('./slider.js');
 const sel = require('./selector.js');
+
 $(function() {
     document.getElementById('mass').onchange = () => { sel.changeMass('mass'); };
     document.getElementById('mass-range').onchange = () => { sel.changeMass('mass-range'); };

@@ -5,7 +5,7 @@
             <div class="swiper-container swiper-container-brand" width="100%" style="height: 100px;">
                 <div class="swiper-wrapper-brand">
                     {% for key in selectors %}
-                    <div class="swiper-slide">
+                    <div class="swiper-slide {{ key }}">
                         {{ key }}
                     </div>
                     {% endfor %}
@@ -16,7 +16,7 @@
             <div class="swiper-container swiper-container-taste" width="100%" style="height: 100px;">
                 <div class="swiper-wrapper-taste">
                     {% for key, val in selectors.items %} {% for t in val %}
-                    <div class="swiper-slide">
+                    <div class="swiper-slide {{ key }}">
                         {{ t }}
                     </div>
                     {% endfor %} {% endfor %}

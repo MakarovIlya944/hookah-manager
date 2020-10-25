@@ -1,3 +1,5 @@
+const sel = require('./selector.js');
+
 $(function() {
     var mainSwiper = new Swiper(".swiper-container", {
         loop: !0,
@@ -16,19 +18,9 @@ $(function() {
         slidesPerView: 1,
         spaceBetween: 30,
         height: 100,
-        direction: "vertical",
-        on: {
-            init: function() {
-                console.log('swiper initialized');
-            },
-        },
+        direction: "vertical"
     });
 
-
-    var s = brandSwiper.on;
-    s('slideChange', () => {
-        console.log('slide changed');
-    });
     var tasteSwiper = new Swiper(".swiper-container-taste", {
         loop: true,
         paginationClickable: true,
@@ -40,4 +32,27 @@ $(function() {
         height: 100,
         direction: "vertical"
     });
+    var slides = {};
+    for (let index = 0; index < tasteSwiper.slides.length; index++) {
+        var c = tasteSwiper.slides[index].classList[1];
+        if (c in slides)
+            slides[c].push(tasteSwiper.slides[index]);
+        else {
+            slides[c] = [];
+            slides[c].push(tasteSwiper.slides[index]);
+        }
+    }
+
+    function changeBrand() {
+        debugger
+        var currentClass = brandSwiper.slides[brandSwiper.activeIndex].classList[1];
+        tasteSwiper.removeAllSlides();
+        for (let index = 0; index < slides[currentClass].length; index++) {
+            tasteSwiper.appendSlide(slides[currentClass][index]);
+        }
+        tasteSwiper.update();
+        mySwiper.slideTo(0, 1, false);
+    }
+
+    brandSwiper.on('transitionEnd', changeBrand);
 });
