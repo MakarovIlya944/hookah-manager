@@ -6,9 +6,9 @@ from django.shortcuts import redirect
 from django.db.models import Q
 
 
-def GetHookerRecipies(username):
+def GetHookerRecipies(username, is_super):
   tabaccos = Tabacco.objects.all()
-  if username != 'admin':
+  if not is_super:
     tabaccos = tabaccos.filter(Keepers__username=username)
   allrecepies = Recipe.objects.all()
   recepies = []
@@ -32,9 +32,9 @@ def GetHookerRecipies(username):
 
   return sorted(recepies, key=lambda x: -x['value'])
 
-def GetHookerTabaccos(username):
+def GetHookerTabaccos(username, is_super):
   tabaccos = Tabacco.objects.all()
-  if username != 'admin':
+  if not is_super:
     tabaccos = tabaccos.filter(Keepers__username=username)
   return [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.icon(), 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
 
@@ -71,8 +71,8 @@ class HookahIndex(View):
 
   def get(self, request, *args, **kwargs):
     page = self.template + '.html'
-    recepies = GetHookerRecipies(request.user.username)
-    tabaccos = GetHookerTabaccos(request.user.username)
+    recepies = GetHookerRecipies(request.user.username, request.user.is_superuser)
+    tabaccos = GetHookerTabaccos(request.user.username, request.user.is_superuser)
     selectorMarks = GetSelectors()
     context = {'tabaccos': tabaccos, 'recepies': recepies, 'selectors': selectorMarks}
     
