@@ -20,8 +20,8 @@
             <div class="swiper-container swiper-container-taste" width="100%" style="height: 100px;">
                 <div class="swiper-wrapper-taste">
                     {% for key, val in selectors.items %} {% for t in val %}
-                    <div class="swiper-slide {{ key }}">
-                        {{ t }}
+                    <div class="swiper-slide {{ key }} taste-{{ t.id }}">
+                        {{ t.name }}
                     </div>
                     {% endfor %} {% endfor %}
                 </div>
@@ -29,6 +29,7 @@
         </div>
         <div class="col-md-4" style="background-color:rgb(65, 65, 73);"></div>
     </div>
-    <input class="form-control" type="hidden" id="input-brand-sw" name="input-sw" value="default">
-    <input class="form-control" type="hidden" id="input-taste-sw" name="input-sw" value="default">
+    <input class="form-control" type="hidden" id="input-brand-sw" name="input-brand" value="default">
+    <input class="form-control" type="hidden" id="input-name-sw" name="input-name" value="default">
+    <input class="form-control" type="hidden" id="input-type-sw" name="input-type" value="add">
 </div>

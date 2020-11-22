@@ -42,17 +42,27 @@ $(function() {
             slides[c].push(tasteSwiper.slides[index]);
         }
     }
+    var currentClass = brandSwiper.slides[brandSwiper.activeIndex].classList[1];
+    document.getElementById("input-brand-sw").value = currentClass;
+    currentClass = tasteSwiper.slides[tasteSwiper.activeIndex].classList[2];
+    document.getElementById("input-name-sw").value = currentClass;
+
+    function changeTaste() {
+        var currentClass = tasteSwiper.slides[tasteSwiper.activeIndex].classList[2];
+        document.getElementById("input-name-sw").value = currentClass;
+    }
 
     function changeBrand() {
-        debugger
         var currentClass = brandSwiper.slides[brandSwiper.activeIndex].classList[1];
         tasteSwiper.removeAllSlides();
         for (let index = 0; index < slides[currentClass].length; index++) {
             tasteSwiper.appendSlide(slides[currentClass][index]);
         }
         tasteSwiper.update();
-        mySwiper.slideTo(0, 1, false);
+        document.getElementById("input-brand-sw").value = currentClass;
+        changeTaste();
     }
 
     brandSwiper.on('transitionEnd', changeBrand);
+    tasteSwiper.on('transitionEnd', changeTaste);
 });
