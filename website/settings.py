@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
-if os.environ.get('SENTRY_SDK') and os.environ.get('ENVIRONMENT') and os.environ.get('ENVIRONMENT') != 'prod':
+if os.environ.get('SENTRY_SDK') and os.environ.get('ENVIRONMENT') and os.environ.get('ENVIRONMENT') == 'prod':
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -25,22 +26,17 @@ if os.environ.get('SENTRY_SDK') and os.environ.get('ENVIRONMENT') and os.environ
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True
     )
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = False
+else:
+    SECRET_KEY = '_1&a#vzneqbz2o!dhpx&8*3c0w1=3du)1-#erk9s^(be0ahru-'
+    DEBUG = True
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '_1&a#vzneqbz2o!dhpx&8*3c0w1=3du)1-#erk9s^(be0ahru-'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['217.71.129.139', '0.0.0.0', '127.0.0.1', 'localhost', '192.168.0.102']
+ALLOWED_HOSTS = ['217.71.129.139', '0.0.0.0', '127.0.0.1', 'localhost', '192.168.0.102', 'hookah-manager.herokuapp.com']
 
 # Application definition
 
@@ -159,3 +155,6 @@ USE_TZ = True
 
 STATIC_ROOT = TEMPLATES_DIR
 STATIC_URL = '/static/'
+
+
+django_heroku.settings(locals())
