@@ -1,11 +1,1 @@
-{% include "select/select-mark.html" %}
-{% include "select/select-taste.html" %}
-<div class="input-group">
-    <div class="input-group-prepend"><span class="input-group-text">{% block valueName %}Вес{% endblock %}<br></span></div><input
-        class="form-control" type="text" inputmode="numeric" id="mass" name="mass" value="50"
-        onchange="changeMass('mass')">
-    <div class="input-group-append"></div>
-    <input type="range" class="border-success custom-range" id="mass-range" value="{% block valueCurrent %}50{% endblock %}" min="{% block valueMin %}10{% endblock %}" max="{% block valueMax %}200{% endblock %}"
-        step="{% block valueStep %}10{% endblock %}" onchange="changeMass('mass-range')" onmousemove="changeMass('mass-range')" />
-</div>
-
+{% include "select/select-mark.html" %} {% include "select/select-taste.html" %} {% include "select/select-mass.html" %}

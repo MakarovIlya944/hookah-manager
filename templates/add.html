@@ -1,14 +1,12 @@
-{% extends "default.html" %}
-{% block content %}
+{% extends "default.html" %} {% block content %}
 
 <div class="container" style="margin-top: 30px;filter: blur(0px);">
     <form method="POST">
         {% csrf_token %}
         <div class="form-group">
-            {% include "select/select-add.html" %}
+            {% include "swiper.html" %} {% include "select/select-mass.html" %}
         </div>
-        <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center"
-            type="submit">Добавить<br></button>
+        <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center" type="submit">Добавить<br></button>
     </form>
 </div>
 

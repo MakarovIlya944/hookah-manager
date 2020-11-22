@@ -2,4 +2,4 @@
 **/__pycache__/**
 venv/**/**
 *.sqlite3
-website/static/src/node_modules/**
+resources/node_modules/**

@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="background-color:rgb(65, 65, 73);">
+            <span style="color: white;">
+                Здесь можно добавить новый табачок к своей коллекции. Выбери марку и название табачка, а также его вес и нажми добавить.
+            </span>
+        </div>
+        <div class="col-md-2 simple-slider-brand">
+            <div class="swiper-container swiper-container-brand" width="100%" style="height: 100px;">
+                <div class="swiper-wrapper-brand">
+                    {% for key in selectors %}
+                    <div class="swiper-slide {{ key }}">
+                        {{ key }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 simple-slider-taste">
+            <div class="swiper-container swiper-container-taste" width="100%" style="height: 100px;">
+                <div class="swiper-wrapper-taste">
+                    {% for key, val in selectors.items %} {% for t in val %}
+                    <div class="swiper-slide {{ key }}">
+                        {{ t }}
+                    </div>
+                    {% endfor %} {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4" style="background-color:rgb(65, 65, 73);"></div>
+    </div>
+    <input class="form-control" type="hidden" id="input-brand-sw" name="input-sw" value="default">
+    <input class="form-control" type="hidden" id="input-taste-sw" name="input-sw" value="default">
+</div>
