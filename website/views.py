@@ -36,19 +36,19 @@ def GetHookerTabaccos(username, is_super):
   tabaccos = Tabacco.objects.all()
   if not is_super:
     tabaccos = tabaccos.filter(Keepers__username=username)
-  return [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.icon()} for t in tabaccos]
+  return [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'id':t.id, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.icon()} for t in tabaccos]
 
 def GetSelectors():
   tabaccos = Tabacco.objects.all()
-  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.Icon} for t in tabaccos]
+  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'id':t.id, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.Icon} for t in tabaccos]
   marks = list(Tabacco.objects.values('Brand').distinct())
-  marks = [m["Brand"] for m in marks]
+  marks = [m["Brand"].replace(' ','-') for m in marks]
   selectorMarks = {}
   for i,m in enumerate(marks):
     selectorMarks[m] = []
     for t in tabaccos:
-      if t["brand"] == m:
-        selectorMarks[m].append(t["name"])
+      if t["brand"].replace(' ','-') == m:
+        selectorMarks[m].append({'id':t['id'], 'name':t["name"]})
   return selectorMarks
 
 def GetTabaccosStat():
@@ -86,28 +86,21 @@ class HookahIndex(View):
 
   def post(self, request, *args, **kwargs):
     if request.path == '/add':
-      if request.POST.get('taste') and request.POST.get('mark'):
-        if request.POST.get('type') == "delete":
-          name = request.POST.get('taste')
-          brand = request.POST.get('mark')
-          t = Tabacco.objects.get(Brand=brand, Name=name)
-          t.save()
+      if request.POST.get('input-brand') and request.POST.get('input-name'):
+        brand = request.POST.get('input-brand')
+        id = request.POST.get('input-name')[len('taste-'):]
+        id = int(id)
+        t = Tabacco.objects.get(Brand=brand, id=id)
+        if request.POST.get('input-type') == "delete":
           h = Hooker.objects.get(username=request.user.username)
-          t.Keepers.add(h)
-          t.save()
+          if h.has_perm('website.change_tabacco'):
+            t.Keepers.remove(h)
 
-        else:
-          name = request.POST.get('taste')
-          brand = request.POST.get('mark')
-          t, j = construct_tobacco({
-            "taste": [
-              "фрукты"
-            ],
-            "brand": brand,
-            "name": name,
-            "strength": 4
-          })
-          t.save()
+        elif request.POST.get('input-type') == "add":
+          h = Hooker.objects.get(username=request.user.username)
+          if h.has_perm('website.change_tabacco'):
+            t.Keepers.add(h)
+        t.save()
       return redirect('/add')
     elif request.path == '/stat':
       if request.POST.get('taste') and request.POST.get('mark'):
