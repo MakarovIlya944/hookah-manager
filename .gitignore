@@ -3,3 +3,4 @@
 venv/**/**
 *.sqlite3
 resources/node_modules/**
+.env
