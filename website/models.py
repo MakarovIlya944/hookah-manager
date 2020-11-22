@@ -60,7 +60,6 @@ class Tabacco(models.Model):
   Name = models.CharField(max_length=32)
   Keepers = models.ManyToManyField(Hooker, blank=True, related_name="Keepers")
   Icon = models.ForeignKey(Icon, null=True, blank=True, related_name="TabaccoIcon", on_delete = models.SET_NULL)
-  Mass = models.IntegerField(default=0)
   Tastes = models.ManyToManyField(Taste, related_name="TabaccoTastes")
   Strength = models.IntegerField(default=5)
 
@@ -73,7 +72,6 @@ class Tabacco(models.Model):
     tastes = self.Tastes.all()
     tastes = [str(t) for t in tastes]
     return {
-          'mass':self.Mass,
           'taste':tastes,
           'brand':self.Brand,
           'name':self.Name,
@@ -82,7 +80,7 @@ class Tabacco(models.Model):
 
   def __str__(self):
     tastes = [str(t) for t in self.Tastes.all()]
-    return f'{self.Brand}: {self.Name} [{",".join(tastes)}]{" Mass: " + str(self.Mass) if self.Mass else ""}'
+    return f'{self.Brand}: {self.Name} [{",".join(tastes)}]'
 
 class Recipe(models.Model):
     WATER = 'WATER'

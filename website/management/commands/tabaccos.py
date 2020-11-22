@@ -38,7 +38,6 @@ def construct_tobacco(data):
         t.save()
         is_new = True
     t.Tastes.set(tastes)
-    t.Mass = data.get('mass')
     t.Brand = brand
     t.Strength = data.get('strength')
     t.Icon = Icon(Icon=Icon.choose_icon(brand))
@@ -154,7 +153,6 @@ class Command(BaseCommand):
                 for d in data:
                     if d["mark"] != "any":
                         tabaccos.append({
-                            'mass':d["mass"],
                             'taste':[], 
                             'brand':d["mark"],
                             'name':d["taste"],

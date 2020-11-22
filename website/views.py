@@ -36,11 +36,11 @@ def GetHookerTabaccos(username, is_super):
   tabaccos = Tabacco.objects.all()
   if not is_super:
     tabaccos = tabaccos.filter(Keepers__username=username)
-  return [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.icon(), 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+  return [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.icon()} for t in tabaccos]
 
 def GetSelectors():
   tabaccos = Tabacco.objects.all()
-  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.Icon, 'mass': t.Mass if t.Mass != 0 else None} for t in tabaccos]
+  tabaccos = [{'strength': t.Strength, 'brand': t.Brand, 'name': t.Name, 'tastes': [str(taste) for taste in t.Tastes.all()], 'icon': t.Icon.Icon} for t in tabaccos]
   marks = list(Tabacco.objects.values('Brand').distinct())
   marks = [m["Brand"] for m in marks]
   selectorMarks = {}
@@ -97,11 +97,9 @@ class HookahIndex(View):
           t.save()
 
         else:
-          mass = request.POST.get('mass')
           name = request.POST.get('taste')
           brand = request.POST.get('mark')
           t, j = construct_tobacco({
-            "mass": 45,
             "taste": [
               "фрукты"
             ],
@@ -114,7 +112,6 @@ class HookahIndex(View):
     elif request.path == '/stat':
       if request.POST.get('taste') and request.POST.get('mark'):
         if request.POST.get('type') == "tabac":
-          mark = request.POST.get('mass')
           name = request.POST.get('taste')
           brand = request.POST.get('mark')
           t = Tabacco.objects.get(Brand=brand, Name=name)
