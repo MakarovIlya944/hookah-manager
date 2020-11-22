@@ -4,7 +4,7 @@
     <form method="POST">
         {% csrf_token %}
         <div class="form-group">
-            {% include "swiper.html" %} {% include "select/select-mass.html" %}
+            {% include "swiper.html" %}
         </div>
         <button class="btn btn-primary border rounded shadow d-xl-flex mx-auto align-items-xl-center" type="submit">Добавить<br></button>
     </form>
@@ -19,7 +19,6 @@
                     <th>Марка</th>
                     <th>Название</th>
                     <th>Крепость</th>
-                    <th>Масса</th>
                     <th>Действия</th>
                 </tr>
             </thead>
@@ -29,7 +28,6 @@
                     <td>{{ tabac.brand }}</td>
                     <td>{{ tabac.name }}</td>
                     <td>{{ tabac.strength }}</td>
-                    <td>{{ tabac.mass }}</td>
                     <td>
                         <form method="POST">
                             {% csrf_token %}

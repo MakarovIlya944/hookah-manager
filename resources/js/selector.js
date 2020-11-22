@@ -1,13 +1,3 @@
-export function changeMass(trueMass) {
-    var mass = document.getElementById("mass");
-    var massR = document.getElementById("mass-range");
-    if (trueMass == "mass") {
-        massR.value = mass.value;
-    } else {
-        mass.value = massR.value;
-    }
-}
-
 export function changeMark(isButton, current) {
     const input = document.getElementById("input-mark");
     if (isButton) {
