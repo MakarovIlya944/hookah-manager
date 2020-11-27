@@ -1,274 +1,250 @@
-[
-  {
-    "mass": 20,
-    "taste": [
-      "ром",
-      "цветы"
-    ],
-    "brand": "dailyhookah",
-    "name": "свободная куба",
-    "strength": 4
-  },
-  {
-    "mass": 45,
-    "taste": [
-      "фрукты"
-    ],
-    "brand": "dgactra",
-    "name": "тропический микс",
-    "strength": 4
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "шоколад",
-      "мороженное"
-    ],
-    "brand": "dgactra",
-    "name": "шоколадное мороженное",
-    "strength": 4
-  },
-  {
-    "mass": 30,
-    "taste": [
-      "энергетик"
-    ],
-    "brand": "spectrum",
-    "name": "энергетик",
-    "strength": 5
-  },
-  {
-    "mass": 100,
-    "taste": [
-      "манго"
-    ],
-    "brand": "must have",
-    "name": "mango slim",
-    "strength": 6
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "пихта",
-      "холод"
-    ],
-    "brand": "darkside",
-    "name": "алтайский трип",
-    "strength": 8
-  },
-  {
-    "mass": 50,
-    "taste": [
-      "мед",
-      "фрукты"
-    ],
-    "brand": "matpeam",
-    "name": "tropic honey",
-    "strength": 6
-  },
-  {
-    "mass": 30,
-    "taste": [
-      "личи"
-    ],
-    "brand": "space smoke",
-    "name": "lycche king",
-    "strength": 0
-  },
-  {
-    "mass": 30,
-    "taste": [
-      "клюква"
-    ],
-    "brand": "space smoke",
-    "name": "cranberry strike",
-    "strength": 0
-  },
-  {
-    "mass": 30,
-    "taste": [],
-    "brand": "space smoke",
-    "name": "jack pirate",
-    "strength": 0
-  },
-  {
-    "mass": 40,
-    "taste": [
-      "банан"
-    ],
-    "brand": "element",
-    "name": "bananerro",
-    "strength": 2
-  },
-  {
-    "mass": 40,
-    "taste": [
-      "байкал"
-    ],
-    "brand": "element",
-    "name": "baikal",
-    "strength": 2
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "кокос"
-    ],
-    "brand": "must have",
-    "name": "coconut shake",
-    "strength": 6
-  },
-  {
-    "mass": 50,
-    "taste": [
-      "лесные ягоды"
-    ],
-    "brand": "baccar",
-    "name": "forest berries",
-    "strength": 6
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "малина"
-    ],
-    "brand": "element",
-    "name": "малина",
-    "strength": 7
-  },
-  {
-    "mass": 40,
-    "taste": [
-      "кислый",
-      "лайм"
-    ],
-    "brand": "matpeam",
-    "name": "la la lime",
-    "strength": 6
-  },
-  {
-    "mass": 40,
-    "taste": [
-      "мята"
-    ],
-    "brand": "spectrum",
-    "name": "ice fruit gum",
-    "strength": 7
-  },
-  {
-    "mass": 50,
-    "taste": [
-      "холод"
-    ],
-    "brand": "darkside",
-    "name": "supernova",
-    "strength": 8
-  },
-  {
-    "mass": 10,
-    "taste": [
-      "мята",
-      "фисташка",
-      "мороженное"
-    ],
-    "brand": "darkside",
-    "name": "polar cream",
-    "strength": 8
-  },
-  {
-    "mass": 15,
-    "taste": [
-      "грейпфрут"
-    ],
-    "brand": "cobra",
-    "name": "grapefruit",
-    "strength": 7
-  },
-  {
-    "mass": 30,
-    "taste": [
-      "лемонграс",
-      "фейхоа",
-      "эвкалипта"
-    ],
-    "brand": "darkside",
-    "name": "таежный трип",
-    "strength": 8
-  },
-  {
-    "mass": 30,
-    "taste": [
-      "мята",
-      "фисташка"
-    ],
-    "brand": "darkside",
-    "name": "байкальский краш",
-    "strength": 8
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "малина"
-    ],
-    "brand": "spectrum",
-    "name": "russian raspberry",
-    "strength": 5
-  },
-  {
-    "mass": 100,
-    "taste": [
-      "вишня",
-      "кислый"
-    ],
-    "brand": "burn",
-    "name": "black cherry shock",
-    "strength": 7
-  },
-  {
-    "mass": 80,
-    "taste": [
-      "барбарис",
-      "жвачка"
-    ],
-    "brand": "darkside",
-    "name": "barberry gum",
-    "strength": 8
-  },
-  {
-    "mass": 40,
-    "taste": [
-      "орех",
-      "пирог"
-    ],
-    "brand": "cobra",
-    "name": "devil's nut cake",
-    "strength": 5
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "огурец базилик"
-    ],
-    "brand": "sebero",
-    "name": "огурец–базилик",
-    "strength": 5
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "томат"
-    ],
-    "brand": "sebero",
-    "name": "томат",
-    "strength": 5
-  },
-  {
-    "mass": 20,
-    "taste": [
-      "пряный чай"
-    ],
-    "brand": "sebero",
-    "name": "спайси-чай",
-    "strength": 5
-  }
+[{
+        "mass": 20,
+        "taste": [
+            "ром",
+            "цветы"
+        ],
+        "brand": "dailyhookah",
+        "name": "свободная куба",
+        "strength": 4
+    },
+    {
+        "mass": 45,
+        "taste": [
+            "фрукты"
+        ],
+        "brand": "dgactra",
+        "name": "тропический микс",
+        "strength": 4
+    },
+    {
+        "mass": 20,
+        "taste": [
+            "шоколад",
+            "мороженное"
+        ],
+        "brand": "dgactra",
+        "name": "шоколадное мороженное",
+        "strength": 4
+    },
+    {
+        "mass": 100,
+        "taste": [
+            "манго"
+        ],
+        "brand": "must have",
+        "name": "mango slim",
+        "strength": 6
+    },
+    {
+        "mass": 20,
+        "taste": [
+            "пихта",
+            "холод"
+        ],
+        "brand": "darkside",
+        "name": "алтайский трип",
+        "strength": 8
+    },
+    {
+        "mass": 50,
+        "taste": [
+            "мед",
+            "фрукты"
+        ],
+        "brand": "matpeam",
+        "name": "tropic honey",
+        "strength": 6
+    },
+    {
+        "mass": 30,
+        "taste": [
+            "личи"
+        ],
+        "brand": "space smoke",
+        "name": "lycche king",
+        "strength": 0
+    },
+    {
+        "mass": 30,
+        "taste": [
+            "клюква"
+        ],
+        "brand": "space smoke",
+        "name": "cranberry strike",
+        "strength": 0
+    },
+    {
+        "mass": 30,
+        "taste": [],
+        "brand": "space smoke",
+        "name": "jack pirate",
+        "strength": 0
+    },
+    {
+        "mass": 40,
+        "taste": [
+            "банан"
+        ],
+        "brand": "element",
+        "name": "bananerro",
+        "strength": 2
+    },
+    {
+        "mass": 40,
+        "taste": [
+            "байкал"
+        ],
+        "brand": "element",
+        "name": "baikal",
+        "strength": 2
+    },
+    {
+        "mass": 20,
+        "taste": [
+            "кокос"
+        ],
+        "brand": "must have",
+        "name": "coconut shake",
+        "strength": 6
+    },
+    {
+        "mass": 50,
+        "taste": [
+            "лесные ягоды"
+        ],
+        "brand": "baccar",
+        "name": "forest berries",
+        "strength": 6
+    },
+    {
+        "mass": 20,
+        "taste": [
+            "малина"
+        ],
+        "brand": "element",
+        "name": "малина",
+        "strength": 7
+    },
+    {
+        "mass": 40,
+        "taste": [
+            "кислый",
+            "лайм"
+        ],
+        "brand": "matpeam",
+        "name": "la la lime",
+        "strength": 6
+    },
+    {
+        "mass": 50,
+        "taste": [
+            "холод"
+        ],
+        "brand": "darkside",
+        "name": "supernova",
+        "strength": 8
+    },
+    {
+        "mass": 10,
+        "taste": [
+            "мята",
+            "фисташка",
+            "мороженное"
+        ],
+        "brand": "darkside",
+        "name": "polar cream",
+        "strength": 8
+    },
+    {
+        "mass": 15,
+        "taste": [
+            "грейпфрут"
+        ],
+        "brand": "cobra",
+        "name": "grapefruit",
+        "strength": 7
+    },
+    {
+        "mass": 30,
+        "taste": [
+            "лемонграс",
+            "фейхоа",
+            "эвкалипта"
+        ],
+        "brand": "darkside",
+        "name": "таежный трип",
+        "strength": 8
+    },
+    {
+        "mass": 30,
+        "taste": [
+            "мята",
+            "фисташка"
+        ],
+        "brand": "darkside",
+        "name": "байкальский краш",
+        "strength": 8
+    },
+    {
+        "mass": 100,
+        "taste": [
+            "вишня",
+            "кислый"
+        ],
+        "brand": "burn",
+        "name": "black cherry shock",
+        "strength": 7
+    },
+    {
+        "mass": 80,
+        "taste": [
+            "барбарис",
+            "жвачка"
+        ],
+        "brand": "darkside",
+        "name": "barberry gum",
+        "strength": 8
+    },
+    {
+        "mass": 40,
+        "taste": [
+            "орех",
+            "пирог"
+        ],
+        "brand": "cobra",
+        "name": "devil's nut cake",
+        "strength": 5
+    },
+    {
+        "mass": 20,
+        "taste": [
+            "огурец базилик"
+        ],
+        "brand": "sebero",
+        "name": "огурец–базилик",
+        "strength": 5
+    },
+    {
+        "mass": 20,
+        "taste": [
+            "томат"
+        ],
+        "brand": "sebero",
+        "name": "томат",
+        "strength": 5
+    },
+    {
+        "mass": 20,
+        "taste": [
+            "пряный чай"
+        ],
+        "brand": "sebero",
+        "name": "спайси-чай",
+        "strength": 5
+    },
+    { "brand": "b3", "name": "another pineapple", "taste": ["ананас"], "strength": 3 }, { "brand": "b3", "name": "beach party", "taste": ["маракуя", "манго", "лимон"], "strength": 3 }, { "brand": "b3", "name": "apple pie", "taste": ["пирог", "яблоко"], "strength": 3 }, { "brand": "b3", "name": "banana cherry", "taste": ["малина", "холод", "банан"], "strength": 3 }, { "brand": "b3", "name": "blueberry muffin", "taste": ["сладкий", "маффин"], "strength": 3 }, { "brand": "b3", "name": "grape soda", "taste": ["газировка", "виноград"], "strength": 3 }, { "brand": "b3", "name": "lady cherry", "taste": ["вишня"], "strength": 3 }, { "brand": "b3", "name": "d+c", "taste": ["топленое молоко", "венгерские вафели"], "strength": 3 }, { "brand": "b3", "name": "mint сhocolate chill ", "taste": ["холод", "мята", "шоколад"], "strength": 3 }, { "brand": "b3", "name": "sweet mango", "taste": ["манго"], "strength": 3 }, { "brand": "b3", "name": "strawberry yougurt", "taste": ["клубника", "йогурт"], "strength": 3 }, { "brand": "b3", "name": "watermelon halls", "taste": ["дыня", "арбуз", "холод"], "strength": 3 }, { "brand": "b3", "name": "wineberry", "taste": ["малина", "виноград"], "strength": 3 }, { "brand": "b3", "name": "spearmint", "taste": ["холод", "мята"], "strength": 3 },
+    { "brand": "element-air", "name": "экзо", "taste": ["мороженное", "арбуз", "клубника"], "strength": 4 }, { "brand": "element-air", "name": "тропикана", "taste": ["фруктовый", "сладкий", "манго"], "strength": 4 }, { "brand": "element-air", "name": "фрутберри", "taste": ["гранат", "сладкий"], "strength": 4 }, { "brand": "element-air", "name": "тамаринд", "taste": ["цитрусовый", "кислый"], "strength": 4 }, { "brand": "element-air", "name": "тайское манго", "taste": ["манго", "травянистый"], "strength": 4 }, { "brand": "element-air", "name": "мятный виноград", "taste": ["виноград", "свежий"], "strength": 4 }, { "brand": "element-air", "name": "орчата", "taste": ["пряный", "ореховый"], "strength": 4 }, { "brand": "element-air", "name": "личи-цитрус", "taste": ["цитрусовый", "личи", "кислый"], "strength": 4 }, { "brand": "element-air", "name": "маргарита", "taste": ["кислый", "лайм", "лимон"], "strength": 4 }, { "brand": "element-air", "name": "лемонграсс", "taste": ["травянистый", "имбирь", "свежий"], "strength": 4 }, { "brand": "element-air", "name": "лесные ягоды", "taste": ["ягодный", "кислый"], "strength": 4 }, { "brand": "element-air", "name": "дыня-черника", "taste": ["дыня", "сладкий"], "strength": 4 }, { "brand": "element-air", "name": "зеленые ягоды", "taste": ["киви", "кислый", "виноград"], "strength": 4 }, { "brand": "element-air", "name": "дынный холс", "taste": ["дыня", "свежий"], "strength": 4 }, { "brand": "element-air", "name": "гранатовый холс", "taste": ["гранат", "свежий"], "strength": 4 }, { "brand": "element-air", "name": "бананерро", "taste": ["банан", "лимон"], "strength": 4 }, { "brand": "element-air", "name": "бэрримор", "taste": ["земляника", "сладкий", "ягодный"], "strength": 4 }, { "brand": "element-air", "name": "бузина", "taste": ["травянистый", "цветочный"], "strength": 4 }, { "brand": "element-air", "name": "беллини", "taste": ["мятный", "персик", "шампанское"], "strength": 4 }, { "brand": "element-air", "name": "байкал", "taste": ["травянистый", "байкал"], "strength": 4 }, { "brand": "element-air", "name": "ананас-папайя", "taste": ["ананас", "папайя", "сладкий"], "strength": 4 },
+    { "brand": "sever", "name": "Ара халва", "taste": ["халва", "сладкий"], "strength": 4 }, { "brand": "sever", "name": "Блатной грейпфрут", "taste": ["грейпфрут", "цитрусовый"], "strength": 4 }, { "brand": "sever", "name": "Босяцкое яблоко", "taste": ["яблоко"], "strength": 4 }, { "brand": "sever", "name": "Вальтовый какао", "taste": ["какао"], "strength": 4 }, { "brand": "sever", "name": "Воровская облепиха", "taste": ["облепиха"], "strength": 4 }, { "brand": "sever", "name": "Кучерявый персик", "taste": ["персик"], "strength": 4 }, { "brand": "sever", "name": "Малина в законе", "taste": ["малина", "ягодный"], "strength": 4 }, { "brand": "sever", "name": "Мастёвая дыня", "taste": ["дыня"], "strength": 4 }, { "brand": "sever", "name": "Нэпманская брусника", "taste": ["брусника"], "strength": 4 }, { "brand": "sever", "name": "Пиковый виноград", "taste": ["виноград"], "strength": 4 }, { "brand": "sever", "name": "Рябиновая борматуха", "taste": ["рябина"], "strength": 4 }, { "brand": "sever", "name": "Смотрящий гранат", "taste": ["гранат"], "strength": 4 }, { "brand": "sever", "name": "Финдеперцовый фейхоа", "taste": ["фейхоа"], "strength": 4 }, { "brand": "sever", "name": "Фраерский ликёр", "taste": ["сладкий"], "strength": 4 }, { "brand": "sever", "name": "Чёрный арбуз", "taste": ["арбуз"], "strength": 4 }, { "brand": "sever", "name": "Сибирская Пихта", "taste": ["пихта"], "strength": 4 }, { "brand": "sever", "name": "Авторитетный ананас", "taste": ["ананас"], "strength": 4 }, { "brand": "sever", "name": "Алтайский сбор", "taste": ["травянистый"], "strength": 4 }, { "brand": "sever", "name": "Блэк Джекфрут", "taste": ["фруктовый"], "strength": 4 }, { "brand": "sever", "name": "Взлетный лайм", "taste": ["лайм"], "strength": 4 }, { "brand": "sever", "name": "Вишневая девятка", "taste": ["вишня"], "strength": 4 }, { "brand": "sever", "name": "Волчья ягода", "taste": ["ягодный"], "strength": 4 }, { "brand": "sever", "name": "Вольный абрикос", "taste": ["абрикос"], "strength": 4 }, { "brand": "sever", "name": "Душевный ром", "taste": ["ром"], "strength": 4 }, { "brand": "sever", "name": "Киви от Гиви", "taste": ["киви"], "strength": 4 }, { "brand": "sever", "name": "Корица по жизни", "taste": ["корица", "пряный"], "strength": 4 }, { "brand": "sever", "name": "Красная смородина", "taste": ["смородина"], "strength": 4 }, { "brand": "sever", "name": "Личи в ажуре", "taste": ["личи"], "strength": 4 }, { "brand": "sever", "name": "Манго освобожденный", "taste": ["манго"], "strength": 4 }, { "brand": "sever", "name": "Мята в хату", "taste": ["мятный", "свежий"], "strength": 4 }, { "brand": "sever", "name": "Рядовой ревень", "taste": ["травянистый"], "strength": 4 }, { "brand": "sever", "name": "Семигуавщина", "taste": ["гуава"], "strength": 4 }, { "brand": "sever", "name": "Центровой кактус", "taste": ["кактус"], "strength": 4 }, { "brand": "sever", "name": "Черная смородина", "taste": ["смородина"], "strength": 4 }, { "brand": "sever", "name": "Чифир в сладость", "taste": ["чайный"], "strength": 4 },
+    { "brand": "spectrum", "name": "agava cactus", "taste": ["сладкий", "травянистый", "кактус"], "strength": 4 }, { "brand": "spectrum", "name": "american peach", "taste": ["сладкий", "десертный", "персик"], "strength": 4 }, { "brand": "spectrum", "name": "caribbean rum", "taste": ["десертный", "пряный", "ром"], "strength": 4 }, { "brand": "spectrum", "name": "bang banana", "taste": ["тропический", "сладкий", "банан"], "strength": 4 }, { "brand": "spectrum", "name": "brazilian tea", "taste": ["травянистый", "чайный"], "strength": 4 }, { "brand": "spectrum", "name": "cookies milk", "taste": ["десертный", "печенье", "молоко"], "strength": 4 }, { "brand": "spectrum", "name": "blue berry", "taste": ["ягодный", "сладкий", "черника"], "strength": 4 }, { "brand": "spectrum", "name": "barberry", "taste": ["кислый", "барбарис"], "strength": 4 }, { "brand": "spectrum", "name": "bacon", "taste": ["гастрономия", "бекон"], "strength": 4 }, { "brand": "spectrum", "name": "fire wine", "taste": ["пряный", "вино"], "strength": 4 }, { "brand": "spectrum", "name": "gazpacho", "taste": ["гастрономия", "пряный", "помидор"], "strength": 4 }, { "brand": "spectrum", "name": "halva", "taste": ["десертный"], "strength": 4 }, { "brand": "spectrum", "name": "lemon hurricane", "taste": ["тропический", "кислый", "лимон"], "strength": 4 }, { "brand": "spectrum", "name": "energy storm", "taste": ["цитрус", "тропический", "энергетик"], "strength": 4 }, { "brand": "spectrum", "name": "dezzert cherry", "taste": ["ягодный", "десертный", "вишня"], "strength": 4 }, { "brand": "spectrum", "name": "ice fruit gum", "taste": ["свежий", "сладкий", "жвачка"], "strength": 4 }, { "brand": "spectrum", "name": "chinese grass", "taste": ["травянистый"], "strength": 4 }, { "brand": "spectrum", "name": "smallberry", "taste": ["ягодный", "сладкий", "земляника"], "strength": 4 }, { "brand": "spectrum", "name": "ginger candies", "taste": ["пряный", "острый", "имбирь"], "strength": 4 }, { "brand": "spectrum", "name": "orange mango", "taste": ["цитрус", "тропический", "апельсин", "манго"], "strength": 4 }, { "brand": "spectrum", "name": "oblepiha", "taste": ["чайный", "ягодный", "облепиха"], "strength": 4 }, { "brand": "spectrum", "name": "jasmine tea", "taste": ["травянистый", "чайный"], "strength": 4 }, { "brand": "spectrum", "name": "shine anise", "taste": ["ягодный", "анис"], "strength": 4 }, { "brand": "spectrum", "name": "epic mint", "taste": ["свежий", "мята"], "strength": 4 }, { "brand": "spectrum", "name": "rye brend", "taste": ["гастрономия", "хлеб"], "strength": 4 }, { "brand": "spectrum", "name": "grape soda", "taste": ["сладкий", "ягодный", "газировка"], "strength": 4 }, { "brand": "spectrum", "name": "jungle mix", "taste": ["цитрусовый", "тропический"], "strength": 4 }, { "brand": "spectrum", "name": "russian raspberry", "taste": ["ягодный", "сладкий", "малина", "клубника"], "strength": 4 }, { "brand": "spectrum", "name": "purple plums", "taste": ["сладкий", "слива"], "strength": 4 }, { "brand": "spectrum", "name": "morning mango", "taste": ["десертный", "тропический", "манго", "овсянка"], "strength": 4 }, { "brand": "spectrum", "name": "granny apple", "taste": ["травянистый", "яблоко"], "strength": 4 }, { "brand": "spectrum", "name": "spicy cheese", "taste": ["гастрономия", "пряный", "сыр"], "strength": 4 }, { "brand": "spectrum", "name": "citrus mix", "taste": ["цитрусовый"], "strength": 4 }, { "brand": "spectrum", "name": "sour cranberry", "taste": ["кислый", "ягодный", "клюква"], "strength": 4 }, { "brand": "spectrum", "name": "zero", "taste": ["неарома"], "strength": 4 }, { "brand": "spectrum", "name": "honeycomb", "taste": ["десертный", "ягодгый", "мед"], "strength": 4 }, { "brand": "spectrum", "name": "juniper", "taste": ["травянистый", "можжевельник"], "strength": 4 }, { "brand": "spectrum", "name": "punch", "taste": ["ягодный", "десертный", "пунш"], "strength": 4 }, { "brand": "spectrum", "name": "bergatea", "taste": ["травянистый", "чайный", "бергамот"], "strength": 4 }, { "brand": "spectrum", "name": "red berry", "taste": ["ягодный", "кислый"], "strength": 4 }, { "brand": "spectrum", "name": "adjika", "taste": ["острый", "гастрономия"], "strength": 4 }, { "brand": "spectrum", "name": "blue gum", "taste": ["гастрономия", "свежий", "эвкалипт"], "strength": 4 }, { "brand": "spectrum", "name": "forest mix", "taste": ["ягодный", "сладкий"], "strength": 4 }, { "brand": "spectrum hard", "name": "agava cactus", "taste": ["сладкий", "травянистый", "кактус"], "strength": 6 }, { "brand": "spectrum hard", "name": "caribbean rum", "taste": ["десертный", "пряный", "ром"], "strength": 6 }, { "brand": "spectrum hard", "name": "brazilian tea", "taste": ["травянистый", "чайный"], "strength": 6 }, { "brand": "spectrum hard", "name": "cookies milk", "taste": ["десертный", "печенье", "молоко"], "strength": 6 }, { "brand": "spectrum hard", "name": "orange mango", "taste": ["цитрус", "тропический", "апельсин", "манго"], "strength": 6 }, { "brand": "spectrum hard", "name": "sweet flower", "taste": ["сладкий", "травянистый", "роза"], "strength": 6 }, { "brand": "spectrum hard", "name": "blue gum", "taste": ["гастрономия", "свежий", "эвкалипт"], "strength": 6 }, { "brand": "spectrum hard", "name": "fire wine", "taste": ["пряный", "вино"], "strength": 6 }, { "brand": "spectrum hard", "name": "granat", "taste": ["тропический", "ягодный", "гранат"], "strength": 6 }, { "brand": "spectrum hard", "name": "blue berry", "taste": ["ягодный", "сладкий", "черника"], "strength": 6 }, { "brand": "spectrum hard", "name": "smallberry", "taste": ["ягодный", "сладкий", "земляника"], "strength": 6 }, { "brand": "spectrum hard", "name": "golden kiwi", "taste": ["тропический"], "strength": 6 }, { "brand": "spectrum hard", "name": "energy storm", "taste": ["цитрус", "тропический", "энергетик"], "strength": 6 }, { "brand": "spectrum hard", "name": "ice fruit gum", "taste": ["свежий", "сладкий", "жвачка"], "strength": 6 }, { "brand": "spectrum hard", "name": "chinese grass", "taste": ["травянистый"], "strength": 6 }, { "brand": "spectrum hard", "name": "russian raspberry", "taste": ["ягодный", "сладкий", "малина", "клубника"], "strength": 6 }, { "brand": "spectrum hard", "name": "morning mango", "taste": ["десертный", "тропический", "манго", "овсянка"], "strength": 6 }, { "brand": "spectrum hard", "name": "lemon hurricane", "taste": ["тропический", "кислый", "лимон"], "strength": 6 }, { "brand": "spectrum hard", "name": "honeycomb", "taste": ["десертный", "ягодгый", "мед"], "strength": 6 }, { "brand": "spectrum hard", "name": "jasmine tea", "taste": ["травянистый", "чайный"], "strength": 6 }, { "brand": "spectrum hard", "name": "bergatea", "taste": ["травянистый", "чайный", "бергамот"], "strength": 6 }, { "brand": "spectrum hard", "name": "jungle mix", "taste": ["цитрусовый", "тропический"], "strength": 6 }, { "brand": "spectrum hard", "name": "grape soda", "taste": ["сладкий", "ягодный", "газировка"], "strength": 6 }, { "brand": "spectrum hard", "name": "nutter", "taste": ["десертный", "орех"], "strength": 6 }
 ]
