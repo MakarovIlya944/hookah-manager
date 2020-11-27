@@ -87,10 +87,9 @@ class HookahIndex(View):
   def post(self, request, *args, **kwargs):
     if request.path == '/add':
       if request.POST.get('input-brand') and request.POST.get('input-name'):
-        brand = request.POST.get('input-brand')
         id = request.POST.get('input-name')[len('taste-'):]
         id = int(id)
-        t = Tabacco.objects.get(Brand=brand, id=id)
+        t = Tabacco.objects.get(id=id)
         if request.POST.get('input-type') == "delete":
           h = Hooker.objects.get(username=request.user.username)
           if h.has_perm('website.change_tabacco'):
