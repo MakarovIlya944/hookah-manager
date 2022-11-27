@@ -22,13 +22,19 @@ pip install -r requirements
 python manage.py tabaccos ...
 ```
 
-
 ```
 python manage.py makemigrations <app>
-python manage.py migrate
+++ python manage.py migrate
 python tobacco <path> <file> 
 python tobacco <path> <file> --my
 ```
 
-## Docker
+```
+npm i webpack-cli
+python manage.py createsuperuser
+```
 
+## Docker
+```
+docker-compose up
+```

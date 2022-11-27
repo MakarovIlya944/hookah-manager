@@ -25,7 +25,7 @@
     {
       "label": "Django-docker: run server",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "runserver"
@@ -48,7 +48,7 @@
     {
       "label": "Django: run server",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "runserver",
@@ -64,7 +64,7 @@
     {
       "label": "Django-migrate: read all",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "tabaccos",
@@ -86,7 +86,7 @@
     {
       "label": "Django-migrate: read tastes",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "tabaccos",
@@ -104,7 +104,7 @@
     {
       "label": "Django-migrate: read tabaccos",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "tabaccos",
@@ -122,7 +122,7 @@
     {
       "label": "Django-migrate: read recipes",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "tabaccos",
@@ -173,7 +173,7 @@
     {
       "label": "Django: run server outworld",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "runserver",
@@ -189,7 +189,7 @@
     {
       "label": "Django: migrate",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "migrate"
@@ -206,7 +206,7 @@
     {
       "label": "Django: migrate app",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "makemigrations",
@@ -221,7 +221,7 @@
     {
       "label": "Django: create super user",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "createsuperuser"
@@ -235,7 +235,7 @@
     {
       "label": "Django-docker: migrate",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "migrate"
@@ -261,7 +261,7 @@
     {
       "label": "Django-docker: migrate app",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "makemigrations",
@@ -285,7 +285,7 @@
     {
       "label": "Django-docker: create super user",
       "type": "shell",
-      "command": "${config:python.pythonPath}",
+      "command": "python",
       "args": [
         "${workspaceFolder}/manage.py",
         "createsuperuser"
